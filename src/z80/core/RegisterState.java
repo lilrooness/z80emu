@@ -15,12 +15,14 @@ public class RegisterState {
 	private byte[] de = new byte[2];
 	private byte[] hl = new byte[2];
 	private byte currentOpcodeByte;
+    private byte i, r;
+    private boolean IFF2, IFF1;
 	/**
 	 * always 16 bit registers
 	 */
 	private short pc, ix, iy, sp;
 	
-	private BitSet psr = new BitSet(8);
+	public static BitSet psr = new BitSet(8);
 	
 	private static RegisterState _INSTANCE;
 
@@ -106,6 +108,36 @@ public class RegisterState {
 	public void setIY(short value) {
 		iy = value;
 	}
-	
-		
+
+    public byte getI() {
+        return i;
+    }
+
+    public byte getR() {
+        return r;
+    }
+
+    public void setI(byte i) {
+        this.i = i;
+    }
+
+    public void setR(byte r) {
+        this.r = r;
+    }
+
+    public boolean isIFF2() {
+        return IFF2;
+    }
+
+    public void setIFF2(boolean IFF2) {
+        this.IFF2 = IFF2;
+    }
+
+    public boolean isIFF1() {
+        return IFF1;
+    }
+
+    public void setIFF1(boolean IFF1) {
+        this.IFF1 = IFF1;
+    }
 }

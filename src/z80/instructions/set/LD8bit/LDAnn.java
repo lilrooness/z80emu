@@ -11,8 +11,8 @@ public class LDAnn extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		byte n1 = registerState.fetchWord8();
 		byte n2 = registerState.fetchWord8();
+		byte n1 = registerState.fetchWord8();
 		registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(BitSet.valueOf(new byte[]{n1, n2}))]});
 	}
 }

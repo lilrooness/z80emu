@@ -4,6 +4,6 @@ import java.util.BitSet;
 
 public class Main {
 	public static void main(String[] args) {
-		BitSet code = new BitSet();
+		
 	}
 }

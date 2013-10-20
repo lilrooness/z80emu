@@ -25,7 +25,7 @@ public class LDrr extends AbstractRegisterInstruction {
 	
 	@Override
 	public void execute(RegisterState registerState) {
-		BitSet opcode = BitSet.valueOf(new byte[] {registerState.getOpcode()});
+		BitSet opcode = BitSet.valueOf(new byte[] {registerState.getCurrentWord8()});
 		byte rFromValue = getRegisterValueByCode(opcode.get(5, 7), registerState)[0];
 		setRegisterValue(registerState, RegisterCodes.getByCode(opcode.get(2, 4)), new byte[]{rFromValue});
 	}

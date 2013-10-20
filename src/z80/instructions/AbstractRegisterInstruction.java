@@ -6,6 +6,14 @@ import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 
 public abstract class AbstractRegisterInstruction implements Instruction {
+
+	protected static BitSet getFirstRegisterBits(BitSet opcode) {
+		return opcode.get(2, 4);
+	}
+	
+	protected static BitSet getSecondRegisterBits(BitSet opcode) {
+		return opcode.get(5, 8);
+	}
 	
 	protected byte[] getRegisterValueByCode(BitSet code, RegisterState state) {
 

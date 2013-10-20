@@ -2,19 +2,25 @@ package z80.core;
 
 import java.util.BitSet;
 
+import z80.memory.Memory;
+
 public class RegisterState {
 	
+	/**
+	 * Thease registers can be used in 8 bit or as 16 bit pairs
+	 */
 	private byte[] a = new byte[2];
 	private byte[] f = new byte[2];
 	private byte[] bc = new byte[2];
 	private byte[] de = new byte[2];
 	private byte[] hl = new byte[2];
-	private byte[] sp = new byte[2];
-	private byte[] ir = new byte[4];
+	private byte currentOpcodeByte;
+	/**
+	 * always 16 bit registers
+	 */
+	private short pc, ix, iy, sp;
 	
 	private BitSet psr = new BitSet(8);
-	
-	byte[] idx = new byte[2];
 	
 	private static RegisterState _INSTANCE;
 
@@ -73,37 +79,33 @@ public class RegisterState {
 		this.hl = hl;
 	}
 
-	public byte[] getIdx() {
-		return idx;
-	}
-
-	public void setIdx(byte[] idx) {
-		this.idx = idx;
+	public byte getCurrentWord8() {
+		return currentOpcodeByte;
 	}
 	
-	public byte getOpcode() {
-		return ir[0];
+	public byte getNextWord8() {
+		return Memory.memory[pc++];
 	}
 	
-	public byte getOperand() {
-		return ir[1];
+	public byte[] getNextWord16() {
+		return new byte[] {Memory.memory[pc++], Memory.memory[pc++]};
 	}
 	
-	public byte[] getWholeInstruction() {
-		return ir;
+	public short getIX() {
+		return ix;
 	}
-	/**
-	 * Sets the instruction register
-	 * @param instruction
-	 */
-	public void setIr(byte[] instruction) {
-		if(instruction.length >2) {
-			throw new IllegalArgumentException("Instruction Too Long");
-		} else if(instruction == null || instruction.length == 0) {
-			throw new IllegalArgumentException("Instruction Not Provided");
-		} else if(instruction.length == 1) {
-			instruction = new byte[]{instruction[0],0};
-		}
-		ir = instruction;
+	
+	public void setIX(short value) {
+		ix = value;
 	}
+	
+	public short getIY() {
+		return iy;
+	}
+	
+	public void setIY(short value) {
+		iy = value;
+	}
+	
+		
 }

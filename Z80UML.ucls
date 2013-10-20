@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <enumeration id="1" language="java" name="z80.core.RegisterCodes" project="Z80Emu" 
+    file="/Z80Emu/src/z80/core/RegisterCodes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="41" y="37" width="189" height="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="2" language="java" name="z80.core.RegisterState" project="Z80Emu" 
+    file="/Z80Emu/src/z80/core/RegisterState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="429" y="37" width="159" height="549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="3" language="java" name="z80.core.StatusFlags" project="Z80Emu" 
+    file="/Z80Emu/src/z80/core/StatusFlags.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="270" y="37" width="119" height="225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="4" language="java" name="z80.instructions.Instruction" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/Instruction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="500" y="636" width="161" height="81"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="z80.instructions.AbstractRegisterInstruction" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/AbstractRegisterInstruction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="1049" y="37" width="308" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="z80.instructions.set.LD8bit.LDrr" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/set/LD8bit/LDrr.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="701" y="636" width="161" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="z80.instructions.set.LD8bit.LDrn" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/set/LD8bit/LDrn.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="902" y="636" width="161" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="z80.instructions.set.LD8bit.LDrHL" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/set/LD8bit/LDrHL.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="1304" y="636" width="161" height="99"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="z80.instructions.set.arith8bit.AddAr" project="Z80Emu" 
+    file="/Z80Emu/src/z80/instructions/set/arith8bit/AddAr.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="1103" y="636" width="161" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="z80.memory.Memory" project="Z80Emu" file="/Z80Emu/src/z80/memory/Memory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position x="868" y="37" width="131" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="z80.util.RadixOperations" project="Z80Emu" 
+    file="/Z80Emu/src/z80/util/RadixOperations.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position x="638" y="37" width="190" height="117"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="16">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="17" name="_INSTANCE"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="20" name="_INSTANCE"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="22">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

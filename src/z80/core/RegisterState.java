@@ -140,4 +140,12 @@ public class RegisterState {
     public void setIFF1(boolean IFF1) {
         this.IFF1 = IFF1;
     }
+
+    public short getPc() {
+        return pc;
+    }
+
+    public void setPc(short pc) {
+        this.pc = pc;
+    }
 }

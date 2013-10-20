@@ -83,11 +83,11 @@ public class RegisterState {
 		return currentOpcodeByte;
 	}
 	
-	public byte getNextWord8() {
+	public byte fetchWord8() {
 		return Memory.memory[pc++];
 	}
 	
-	public byte[] getNextWord16() {
+	public byte[] fetchWord16() {
 		return new byte[] {Memory.memory[pc++], Memory.memory[pc++]};
 	}
 	

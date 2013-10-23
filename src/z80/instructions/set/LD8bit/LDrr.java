@@ -21,7 +21,7 @@ import z80.instructions.AbstractRegisterInstruction;
  */
 public class LDrr extends AbstractRegisterInstruction {
 
-	public static int cycles = 1;
+	public int cycles = 1;
 	
 	@Override
 	public void execute(RegisterState registerState) {
@@ -29,5 +29,4 @@ public class LDrr extends AbstractRegisterInstruction {
 		byte rFromValue = getRegisterValueByCode(opcode.get(5, 7), registerState)[0];
 		setRegisterValue(registerState, RegisterCodes.getByCode(opcode.get(2, 4)), new byte[]{rFromValue});
 	}
-
 }

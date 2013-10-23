@@ -1,11 +1,10 @@
 package z80.test;
 
-import java.util.BitSet;
+import z80.core.Control;
 
 public class Main {
 	public static void main(String[] args) {
-		byte x = 0;
-		x -= 5;
-		System.out.println(x);
+        Control control = new Control();
+        control.runProgram((short)1);
 	}
 }

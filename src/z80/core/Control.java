@@ -19,9 +19,10 @@ public class Control {
 
     private boolean isRunning = true;
     RegisterState registerState;
+
     public void runProgram(short startAddress) {
         registerState = RegisterState.getInstance();
-
+        registerState.setPc(startAddress);
         while(isRunning) {
             byte opcode = registerState.fetchWord8();
             if(!isPrefix(opcode)) {

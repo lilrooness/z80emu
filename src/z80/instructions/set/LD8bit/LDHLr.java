@@ -1,8 +1,5 @@
 package z80.instructions.set.LD8bit;
 
-import java.util.BitSet;
-
-import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
 import z80.memory.Memory;
@@ -12,8 +9,11 @@ public class LDHLr extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		short index = RadixOperations.toShort(BitSet.valueOf(registerState.getHl()));
-		byte value = getRegisterValueByCode(getSecondRegisterBits(BitSet.valueOf(new byte[]{registerState.getCurrentWord8()})), registerState)[0];
+        String HL;
+        HL = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xFF)) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1]));
+        short index = RadixOperations.toShort(HL);
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
+		byte value = getRegisterValueByCode(opcode.substring(5), registerState)[0];
 		Memory.memory[index] = value;
 	}
 }

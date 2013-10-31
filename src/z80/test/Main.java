@@ -10,7 +10,7 @@ import java.util.BitSet;
 public class Main {
 
     public static void main(String[] args) {
-        String code = "00111110 00000011 01110110";
+        String code = "00111110000000110100011101110110";
         BitSet processedCode = new BitSet(code.length());
         for(int i=0; i<code.length(); i++) {
             if(code.charAt(i) == '1') {
@@ -33,5 +33,6 @@ public class Main {
 
         RegisterState registerState = RegisterState.getInstance();
         System.out.println("reg A: "+ registerState.getA()[0]);
+        System.out.println("reg B: "+ registerState.getBc()[0]);
     }
 }

@@ -5,14 +5,14 @@ import java.util.BitSet;
 import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
 import z80.memory.Memory;
+import z80.util.RadixOperations;
 
 public class LDIXdr extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		BitSet opcode = BitSet.valueOf(new byte[]{registerState.getCurrentWord8()});
-		byte value = getRegisterValueByCode(AbstractRegisterInstruction.getSecondRegisterBits(opcode), registerState)[0];
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
+		byte value = getRegisterValueByCode(opcode.substring(5), registerState)[0];
 		Memory.memory[registerState.getIX()+registerState.fetchWord8()] = value;
 	}
-
 }

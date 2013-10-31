@@ -38,6 +38,30 @@ public abstract class AbstractRegisterInstruction implements Instruction {
 		}
 		throw new IllegalArgumentException("Register Does Not Exist");
 	}
+
+    protected static byte[] getRegisterValueByCode(String code, RegisterState state) {
+
+        RegisterCodes c = RegisterCodes.getByCode(code);
+        if (c != null) {
+            switch (c) {
+                case A:
+                    return new byte[] { state.getA()[0] };
+                case B:
+                    return new byte[] { state.getBc()[0] };
+                case C:
+                    return new byte[] { state.getBc()[1] };
+                case D:
+                    return new byte[] { state.getDe()[0] };
+                case E:
+                    return new byte[] { state.getDe()[1] };
+                case H:
+                    return new byte[] { state.getHl()[0] };
+                case L:
+                    return new byte[] { state.getHl()[1] };
+            }
+        }
+        throw new IllegalArgumentException("Register Does Not Exist");
+    }
 	
 	protected static void setRegisterValue(RegisterState registerState, RegisterCodes c, byte[] value) {
 		if(c != null) {

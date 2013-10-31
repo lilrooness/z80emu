@@ -18,6 +18,8 @@ public class LDDEA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {
         byte value = registerState.getA()[0];
-        Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getDe()))] = value;
+        String D = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[0] & 0xff));
+        String E = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1] & 0xff));
+        Memory.memory[RadixOperations.toShort(D+E)] = value;
     }
 }

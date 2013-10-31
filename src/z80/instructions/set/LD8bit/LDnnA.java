@@ -19,8 +19,9 @@ public class LDnnA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {
         byte value = registerState.getA()[0];
-        byte n2 = registerState.fetchWord8();
-        byte n1 = registerState.fetchWord8();
-        Memory.memory[RadixOperations.toShort(BitSet.valueOf(new byte[]{n1, n2}))] = value;
+        String n2 = Integer.toBinaryString(registerState.fetchWord8() & 0xFF);
+        String n1 = Integer.toBinaryString(registerState.fetchWord8() & 0xFF);
+
+        Memory.memory[RadixOperations.toShort(RadixOperations.prependZeros(n2) + RadixOperations.prependZeros(n1))] = value;
     }
 }

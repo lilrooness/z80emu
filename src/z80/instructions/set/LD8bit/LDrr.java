@@ -11,6 +11,7 @@ import java.util.BitSet;
 import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
+import z80.util.RadixOperations;
 
 /**
  * <description>
@@ -25,8 +26,9 @@ public class LDrr extends AbstractRegisterInstruction {
 	
 	@Override
 	public void execute(RegisterState registerState) {
-		BitSet opcode = BitSet.valueOf(new byte[] {registerState.getCurrentWord8()});
-		byte rFromValue = getRegisterValueByCode(opcode.get(5, 7), registerState)[0];
-		setRegisterValue(registerState, RegisterCodes.getByCode(opcode.get(2, 4)), new byte[]{rFromValue});
+//		BitSet opcode = BitSet.valueOf(new byte[] {registerState.getCurrentWord8()});
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
+		byte rFromValue = getRegisterValueByCode(opcode.substring(5, 8), registerState)[0];
+		setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 5)), new byte[]{rFromValue});
 	}
 }

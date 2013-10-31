@@ -17,24 +17,35 @@ import java.util.Stack;
  * @version 05, 2005
  */
 public class RadixOperations {
-	public static short toShort(BitSet bitSet) {
-		Stack<Boolean> stack = new Stack<Boolean>();
-		//first reverse the bit order so the LSB is on top of the stack
-		for(int i=0; i<bitSet.length(); i++) {
-			stack.push(bitSet.get(i));
-		}
-		short sum = 0;
-		for(int i=0; i<bitSet.length(); i++) {
-			if(stack.pop()) {
-				sum += 2^i;
-			}
-		}
-		return sum;
-	}
+//	public static short toShort(BitSet bitSet) {
+//		Stack<Boolean> stack = new Stack<>();
+//		//first reverse the bit order so the LSB is on top of the stack
+//		for(int i=0; i<bitSet.length(); i++) {
+//			stack.push(bitSet.get(i));
+//		}
+//		short sum = 0;
+//		for(int i=0; i<bitSet.length(); i++) {
+//			if(stack.pop()) {
+//				sum += 2^i;
+//			}
+//		}
+//		return sum;
+//	}
+
+    public static short toShort(String bitSet) {
+        short sum = 0;
+
+        String reversed = new StringBuilder(bitSet).reverse().toString();
+
+        for(int i=0; i < reversed.length(); i++) {
+            if(reversed.charAt(i) == '1') {
+                sum += Math.pow(2, i);
+            }
+        }
+        return sum;
+    }
 
     public static byte[] toByteArray(String binary) {
-        int byteIndex = 0;
-
         byte[] bytes = new byte[binary.length() / 8];
         for(int i=0; i<binary.length() / 8; i++) {
             int base = 8 * i;
@@ -47,12 +58,23 @@ public class RadixOperations {
         return bytes;
     }
 
+
     public static boolean checkEquals(BitSet bitset1, BitSet bitSet2) {
         for(int i=0; i<bitset1.length(); i++) {
             boolean _1 = bitset1.get(i);
             boolean _2 = bitSet2.get(i);
 
             if(bitset1.get(i) != bitSet2.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkEquals(String bitSet1, String bitSet2) {
+        for(int i=0; i<bitSet1.length(); i++) {
+
+            if(bitSet1.charAt(i) != bitSet2.charAt(i)) {
                 return false;
             }
         }
@@ -76,5 +98,22 @@ public class RadixOperations {
         return bitSet;
     }
 
-    
+    public static String prependZeros(String binString) {
+        if(binString.length() < 8) {
+            int diff = 8 - binString.length();
+            String prepend = "";
+            for(int i=0; i<diff; i++) {
+                prepend = prepend + "0";
+            }
+            return prepend+binString;
+        }
+        return binString;
+    }
+
+    public static boolean getBit(String binString, int index) {
+        if(binString.charAt(index) == '1') {
+            return true;
+        }
+        return false;
+    }
 }

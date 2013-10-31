@@ -12,6 +12,7 @@ public class LDHLn extends AbstractRegisterInstruction {
 	@Override
 	public void execute(RegisterState registerState) {
 		byte value = registerState.fetchWord8();
-		Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getHl()))] = value;
+        String HL = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xFF)) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1]));
+		Memory.memory[RadixOperations.toShort(HL)] = value;
 	}
 }

@@ -25,8 +25,11 @@ public class LDrHL extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		BitSet registerCode = BitSet.valueOf(new byte[]{registerState.getCurrentWord8()}).get(2, 4);
-		byte value = Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getHl()))];//use value of HL to index into memory
+		String registerCode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF)).substring(2, 5);
+        String l = Integer.toBinaryString(registerState.getHl()[0] & 0xFF);
+        String h = Integer.toBinaryString(registerState.getHl()[1] & 0xFF);
+        String hl = RadixOperations.prependZeros(h) + RadixOperations.prependZeros(l);
+		byte value = Memory.memory[RadixOperations.toShort(hl)];//use value of HL to index into memory
 		setRegisterValue(registerState, RegisterCodes.getByCode(registerCode), new byte[]{value});
 	}
 }

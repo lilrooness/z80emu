@@ -6,6 +6,7 @@
  */
 package z80.core;
 
+import z80.instructions.set.LD8bit.LDrn;
 import z80.instructions.set.LD8bit.LDrr;
 
 /**
@@ -34,12 +35,11 @@ public class Control {
     }
 
     private void processUnPrefixed(byte opcode, RegisterState registerState) {
-        int opcodei = opcode & 0xff;
-        switch (opcodei) {
+        switch (opcode) {
             //HALT
             case 0x76: {
                 isRunning = false;
-            }
+            }break;
             //LD r, r'
             case 0x78:
             case 0x79:
@@ -76,8 +76,19 @@ public class Control {
             case 0x61:
             case 0x62:
             case 0x63:
-            case 0x65:{
+            case 0x65: {
                 LDrr instruction = new LDrr();
+                instruction.execute(registerState);
+            }break;
+            //LD r, n
+            case 0x3E:
+            case 0x6:
+            case 0xE:
+            case 0x16:
+            case 0x1E:
+            case 0x26:
+            case 0x2E: {
+                LDrn instruction = new LDrn();
                 instruction.execute(registerState);
             }break;
         }

@@ -31,5 +31,50 @@ public class RadixOperations {
 		}
 		return sum;
 	}
-	
+
+    public static byte[] toByteArray(String binary) {
+        int byteIndex = 0;
+
+        byte[] bytes = new byte[binary.length() / 8];
+        for(int i=0; i<binary.length() / 8; i++) {
+            int base = 8 * i;
+            for(int j=0; j<8; j++) {
+                if(binary.charAt(base + j) == '1') {
+                    bytes[i] += Math.pow(2, (7 - j));
+                }
+            }
+        }
+        return bytes;
+    }
+
+    public static boolean checkEquals(BitSet bitset1, BitSet bitSet2) {
+        for(int i=0; i<bitset1.length(); i++) {
+            boolean _1 = bitset1.get(i);
+            boolean _2 = bitSet2.get(i);
+
+            if(bitset1.get(i) != bitSet2.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static BitSet stringByteToBitSet(String bitString) {
+        BitSet bitSet = new BitSet(8);
+        int prepend = 8 - bitString.length();
+        int original_prepend = prepend;
+        for(int i=0; i<8; i++) {
+            if(prepend > 0) {
+                bitSet.set(i, false);
+                prepend --;
+            } else {
+                if(bitString.charAt(i - original_prepend) == '1') {
+                    bitSet.set(i);
+                }
+            }
+        }
+        return bitSet;
+    }
+
+    
 }

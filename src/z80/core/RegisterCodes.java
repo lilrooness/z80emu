@@ -1,5 +1,7 @@
 package z80.core;
 
+import z80.util.RadixOperations;
+
 import java.util.BitSet;
 
 public enum RegisterCodes {
@@ -12,8 +14,10 @@ public enum RegisterCodes {
 		this.bitSet = new BitSet(3);
 		String[] split = code.split("");
 
-		for(int i = 0;i < split.length; i++) {
-			bitSet.set(i);
+		for(int i = 0;i < code.length(); i++) {
+            if(code.charAt(i) == '1') {
+                bitSet.set(i);
+            }
 		}
 	}
 
@@ -23,8 +27,9 @@ public enum RegisterCodes {
 
 	public static RegisterCodes getByCode(BitSet code) {
 		for (RegisterCodes c : values()) {
-			if (c.getCodeAsBitSet().equals(code))
-				return c;
+			if (RadixOperations.checkEquals(c.getCodeAsBitSet(),code)) {
+                return c;
+            }
 		}
 
 		return null;

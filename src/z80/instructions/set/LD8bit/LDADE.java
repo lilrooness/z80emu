@@ -11,7 +11,8 @@ public class LDADE extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		registerState.setA(new byte[] {Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getDe()))]});
+        String DE = Integer.toBinaryString(registerState.getDe()[0]) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1]));
+		registerState.setA(new byte[] {Memory.memory[RadixOperations.toShort(DE)]});
 	}
 
 }

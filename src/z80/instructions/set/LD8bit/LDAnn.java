@@ -13,6 +13,7 @@ public class LDAnn extends AbstractRegisterInstruction {
 	public void execute(RegisterState registerState) {
 		byte n2 = registerState.fetchWord8();
 		byte n1 = registerState.fetchWord8();
-		registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(BitSet.valueOf(new byte[]{n1, n2}))]});
+        String nn = Integer.toBinaryString(n2) + RadixOperations.prependZeros(Integer.toBinaryString(n1));
+		registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(nn)]});
 	}
 }

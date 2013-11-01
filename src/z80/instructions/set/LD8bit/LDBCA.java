@@ -5,7 +5,6 @@ import z80.instructions.AbstractRegisterInstruction;
 import z80.memory.Memory;
 import z80.util.RadixOperations;
 
-import java.util.BitSet;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +17,8 @@ public class LDBCA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {
         byte value = registerState.getA()[0];
-        Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getBc()))] = value;
+        String bc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[0])) +
+                RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[1]));
+        Memory.memory[RadixOperations.toShort(bc)] = value;
     }
 }

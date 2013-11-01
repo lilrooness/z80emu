@@ -11,6 +11,7 @@ public class LDABC extends AbstractRegisterInstruction {
 
 	@Override
 	public void execute(RegisterState registerState) {
-		registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(BitSet.valueOf(registerState.getBc()))]});
+        String BC = Integer.toBinaryString(registerState.getBc()[0]) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[1]));
+		registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(BC)]});
 	}
 }

@@ -1,6 +1,7 @@
 package z80.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +12,12 @@ import javax.swing.*;
  */
 public class Window extends JFrame {
     public Window(int width, int height) {
+        setLayout(new BorderLayout());
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(new InfoPanel(100, 100));
+        add(new InfoPanel(), BorderLayout.NORTH);
+        add(new IDE(width, height), BorderLayout.SOUTH);
+        add(new Controls(), BorderLayout.EAST);
         pack();
         setVisible(true);
     }

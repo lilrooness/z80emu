@@ -13,9 +13,9 @@ import java.awt.*;
 public class InfoPanel extends JPanel {
 
     GridBagConstraints c;
-    JPanel af, bc, de, hl;
+    private JPanel af, bc, de, hl;
 
-    public InfoPanel(int width, int height) {
+    public InfoPanel() {
         GridLayout globalLayout = new GridLayout(2,2);
         globalLayout.setHgap(5);
         globalLayout.setVgap(5);

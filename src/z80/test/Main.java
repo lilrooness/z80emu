@@ -2,6 +2,7 @@ package z80.test;
 
 import z80.core.Control;
 import z80.core.RegisterState;
+import z80.gui.Window;
 import z80.memory.Memory;
 import z80.util.RadixOperations;
 
@@ -34,5 +35,7 @@ public class Main {
         RegisterState registerState = RegisterState.getInstance();
         System.out.println("reg A: "+ registerState.getA()[0]);
         System.out.println("reg B: "+ registerState.getBc()[0]);
+
+        new Window(640,480);
     }
 }

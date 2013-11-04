@@ -15,7 +15,7 @@ public class Controls extends JPanel{
     private JPanel top, tmiddle, bottom;
 
     public Controls() {
-        new GridLayout(3, 1);
+        new GridLayout(1, 3);
         top = new JPanel();
         tmiddle = new JPanel();
         bottom = new JPanel();
@@ -29,7 +29,6 @@ public class Controls extends JPanel{
         top.add(pause);
         tmiddle.add(run);
         bottom.add(stop);
-
 
         add(top);
         add(tmiddle);

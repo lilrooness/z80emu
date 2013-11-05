@@ -14,11 +14,14 @@ public class Window extends JFrame {
     public Window(int width, int height) {
         setLayout(new BorderLayout());
         setSize(width, height);
+        InfoPanel infoPanel = new InfoPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(new InfoPanel(), BorderLayout.NORTH);
+        add(infoPanel, BorderLayout.NORTH);
         add(new IDE(width, height), BorderLayout.SOUTH);
         add(new Controls(), BorderLayout.EAST);
         pack();
+        Thread updateLoop = new Thread(infoPanel);
+        updateLoop.start();
         setVisible(true);
     }
 }

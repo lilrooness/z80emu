@@ -18,6 +18,6 @@ public class IDE extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(parentWidth, parentHeight / 2));
         input = new JTextArea();
-        add(input);
+        add(new JScrollPane(input));
     }
 }

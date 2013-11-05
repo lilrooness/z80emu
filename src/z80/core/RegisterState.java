@@ -5,6 +5,8 @@ import java.util.BitSet;
 import z80.memory.Memory;
 
 public class RegisterState {
+
+    private boolean runningProgram;
 	
 	/**
 	 * Thease registers can be used in 8 bit or as 16 bit pairs
@@ -148,5 +150,13 @@ public class RegisterState {
 
     public void setPc(short pc) {
         this.pc = pc;
+    }
+
+    public boolean isRunningProgram() {
+        return runningProgram;
+    }
+
+    public void setRunningProgram(boolean runningProgram) {
+        this.runningProgram = runningProgram;
     }
 }

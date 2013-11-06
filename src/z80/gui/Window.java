@@ -11,17 +11,37 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Window extends JFrame {
+
+    private IDE ide;
+    private InfoPanel infoPanel;
+
     public Window(int width, int height) {
         setLayout(new BorderLayout());
         setSize(width, height);
-        InfoPanel infoPanel = new InfoPanel();
+
+        infoPanel = new InfoPanel();
+        ide = new IDE(width, height);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(infoPanel, BorderLayout.NORTH);
-        add(new IDE(width, height), BorderLayout.SOUTH);
-        add(new Controls(), BorderLayout.EAST);
+        add(ide, BorderLayout.SOUTH);
+
+        add(new ControlPanel(this), BorderLayout.EAST);
         pack();
         Thread updateLoop = new Thread(infoPanel);
         updateLoop.start();
         setVisible(true);
+    }
+
+    public IDE getIde() {
+        return ide;
+    }
+
+    public InfoPanel getInfoPanel() {
+        return infoPanel;
+    }
+
+    public static void main(String[] args) {
+        new Window(640, 480);
     }
 }

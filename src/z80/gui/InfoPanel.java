@@ -74,17 +74,17 @@ public class InfoPanel extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        registerState = RegisterState.getInstance();
-        a.setText(Integer.toHexString(registerState.getA()[0]));
-        f.setText(Integer.toHexString(registerState.getA()[1]));
-        b.setText(Integer.toHexString(registerState.getBc()[0]));
-        c.setText(Integer.toHexString(registerState.getBc()[1]));
-        d.setText(Integer.toHexString(registerState.getDe()[0]));
-        e.setText(Integer.toHexString(registerState.getDe()[1]));
-        h.setText(Integer.toHexString(registerState.getHl()[0]));
-        l.setText(Integer.toHexString(registerState.getHl()[1]));
-        while(registerState.isRunningProgram()) {
 
+        while(true) {
+            registerState = RegisterState.getInstance();
+            a.setText(Integer.toHexString(registerState.getA()[0]));
+//        f.setText(Integer.toHexString(registerState.getA()[1]));
+            b.setText(Integer.toHexString(registerState.getBc()[0]));
+            c.setText(Integer.toHexString(registerState.getBc()[1]));
+            d.setText(Integer.toHexString(registerState.getDe()[0]));
+            e.setText(Integer.toHexString(registerState.getDe()[1]));
+            h.setText(Integer.toHexString(registerState.getHl()[0]));
+            l.setText(Integer.toHexString(registerState.getHl()[1]));
         }
     }
 }

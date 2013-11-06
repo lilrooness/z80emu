@@ -20,4 +20,12 @@ public class IDE extends JPanel {
         input = new JTextArea();
         add(new JScrollPane(input));
     }
+
+    public JTextArea getInput() {
+        return input;
+    }
+
+    public void setInput(JTextArea input) {
+        this.input = input;
+    }
 }

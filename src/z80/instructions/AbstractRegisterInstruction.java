@@ -63,7 +63,7 @@ public abstract class AbstractRegisterInstruction implements Instruction {
         throw new IllegalArgumentException("Register Does Not Exist");
     }
 	
-	protected static void setRegisterValue(RegisterState registerState, RegisterCodes c, byte[] value) {
+	public static void setRegisterValue(RegisterState registerState, RegisterCodes c, byte[] value) {
 		if(c != null) {
 			switch(c) {
 			case A:{

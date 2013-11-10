@@ -77,14 +77,14 @@ public class InfoPanel extends JPanel implements Runnable{
 
         while(true) {
             registerState = RegisterState.getInstance();
-            a.setText(Integer.toHexString(registerState.getA()[0]));
+            a.setText(Integer.toHexString(registerState.getA()[0] & 0xff));
 //        f.setText(Integer.toHexString(registerState.getA()[1]));
-            b.setText(Integer.toHexString(registerState.getBc()[0]));
-            c.setText(Integer.toHexString(registerState.getBc()[1]));
-            d.setText(Integer.toHexString(registerState.getDe()[0]));
-            e.setText(Integer.toHexString(registerState.getDe()[1]));
-            h.setText(Integer.toHexString(registerState.getHl()[0]));
-            l.setText(Integer.toHexString(registerState.getHl()[1]));
+            b.setText(Integer.toHexString(registerState.getBc()[0] & 0xff));
+            c.setText(Integer.toHexString(registerState.getBc()[1] & 0xff));
+            d.setText(Integer.toHexString(registerState.getDe()[0] & 0xff));
+            e.setText(Integer.toHexString(registerState.getDe()[1] & 0xff));
+            h.setText(Integer.toHexString(registerState.getHl()[0] & 0xff));
+            l.setText(Integer.toHexString(registerState.getHl()[1] & 0xff));
         }
     }
 }

@@ -93,4 +93,59 @@ public abstract class AbstractRegisterInstruction implements Instruction {
 			}	
 		}
 	}
+
+    public static byte getRegisterValue(RegisterState registerState, RegisterCodes c) {
+        if(c != null) {
+            switch(c) {
+                case A:{
+//                    registerState.setA(value);
+                    return registerState.getA()[0];
+                }
+                case B:{
+//                    registerState.setBc(new byte[]{value[0], registerState.getBc()[1]});
+                    return registerState.getBc()[0];
+                }
+                case C:{
+//                    registerState.setBc(new byte[]{registerState.getBc()[0], value[0]});
+                    return registerState.getBc()[1];
+                }
+                case D:{
+//                    registerState.setDe(new byte[]{value[0], registerState.getDe()[1]});
+                    return registerState.getDe()[0];
+                }
+                case E:{
+//                    registerState.setDe(new byte[]{registerState.getDe()[0], value[0]});
+                    return registerState.getDe()[1];
+                }
+                case H:{
+//                    registerState.setHl(new byte[]{value[0], registerState.getHl()[1]});
+                    return registerState.getHl()[0];
+                }
+                case L:{
+//                    registerState.setHl(new byte[]{registerState.getHl()[0], value[0]});
+                    return registerState.getHl()[1];
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    public static byte[] get16BitRegisterValue(RegisterState registerState, RegisterCodes c) {
+        if(c !=  null) {
+            switch (c) {
+                case HL: {
+                    return registerState.getHl();
+                }
+                case DE: {
+                    return registerState.getDe();
+                }
+                case BC: {
+                    return registerState.getBc();
+                }
+            }
+        }
+        return null;
+    }
+
 }

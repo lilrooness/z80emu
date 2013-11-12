@@ -203,4 +203,47 @@ public class LD16 {
         return 6;
     }
 
+    public int LD_nn_IY() {
+        RegisterState registerState = RegisterState.getInstance();
+
+        String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String n2 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+
+        short nn = RadixOperations.toShort(n2 + n1);
+        String ix = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIY() & 0xff));
+        String ixl = ix.substring(4);
+        String ixh = ix.substring(0, 4);
+
+        short ixls = RadixOperations.toShort(ixl);
+        short ixhs = RadixOperations.toShort(ixh);
+
+        Memory.memory[nn] = (byte)ixhs;
+        Memory.memory[nn + 1] = (byte)ixls;
+
+        return 6;
+    }
+
+    public int LDSPHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String h = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xff));
+        String l = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
+
+        String hl = h + l;
+        registerState.setSp(RadixOperations.toShort(hl));
+        return 1;
+    };
+
+    public int LDSPIX() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setSp(registerState.getIX());
+        return 2;
+    }
+
+    public int LDSPIY() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setSp(registerState.getIY());
+        return 2;
+    }
+
+
 }

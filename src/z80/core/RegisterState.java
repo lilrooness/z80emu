@@ -159,4 +159,12 @@ public class RegisterState {
     public void setRunningProgram(boolean runningProgram) {
         this.runningProgram = runningProgram;
     }
+
+    public short getSp() {
+        return sp;
+    }
+
+    public void setSp(short sp) {
+        this.sp = sp;
+    }
 }

@@ -260,25 +260,71 @@ public class LD16 {
     }
 
     public int pushIX() {
+        RegisterState registerState = RegisterState.getInstance();
+        String IX = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIX() & 0xff));
+
+        String I = IX.substring(0,5);
+        String X = IX.substring(5);
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(I);
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(X);
 
         return 4;
     }
 
     public int pushIY() {
+        RegisterState registerState = RegisterState.getInstance();
+        String IY = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIY() & 0xff));
+
+        String I = IY.substring(0,5);
+        String Y = IY.substring(5);
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(I);
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(Y);
+
         return 4;
     }
 
     public int popqq() {
+        RegisterState registerState = RegisterState.getInstance();
 
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        byte[] set = new byte[] {(byte)RadixOperations.toShort(high), (byte)RadixOperations.toShort(low)};
+
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
         return 3;
     }
 
     public int popIX() {
+        RegisterState registerState = RegisterState.getInstance();
 
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+
+        short value = RadixOperations.toShort(high + low);
+        registerState.setIX(value);
         return 4;
     }
 
     public int popIY() {
+        RegisterState registerState = RegisterState.getInstance();
+
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        registerState.setSp((short) (registerState.getSp() + 1));
+
+        short value = RadixOperations.toShort(high + low);
+        registerState.setIY(value);
         return 4;
     }
 }

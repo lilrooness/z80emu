@@ -245,5 +245,40 @@ public class LD16 {
         return 2;
     }
 
+    public int pushqq() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        RegisterCodes.getByCode(opcode.substring(2, 4));
 
+        byte[] value = AbstractRegisterInstruction.get16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)));
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = value[0];
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = value[1];
+
+        return 3;
+    }
+
+    public int pushIX() {
+
+        return 4;
+    }
+
+    public int pushIY() {
+        return 4;
+    }
+
+    public int popqq() {
+
+        return 3;
+    }
+
+    public int popIX() {
+
+        return 4;
+    }
+
+    public int popIY() {
+        return 4;
+    }
 }

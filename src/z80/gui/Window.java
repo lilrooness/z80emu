@@ -30,15 +30,15 @@ public class Window extends JFrame {
         add(new ControlPanel(this), BorderLayout.EAST);
         pack();
 
-        SwingWorker worker = new SwingWorker<Object, Object>() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                while(true) {
-                    infoPanel.updateGui();
-                }
-            }
-        };
-        worker.execute();
+//        SwingWorker worker = new SwingWorker<Object, Object>() {
+//            @Override
+//            protected Object doInBackground() throws Exception {
+//                while(true) {
+//                    infoPanel.updateGui();
+//                }
+//            }
+//        };
+//        worker.execute();
 
         setVisible(true);
     }

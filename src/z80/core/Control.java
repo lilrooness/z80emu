@@ -6,8 +6,7 @@
  */
 package z80.core;
 
-import z80.instructions.set.LD8bit.LDrn;
-import z80.instructions.set.LD8bit.LDrr;
+import z80.instructions.set.LD8bit.*;
 
 /**
  * <description>
@@ -91,13 +90,81 @@ public class Control {
                 LDrn instruction = new LDrn();
                 instruction.execute(registerState);
             }break;
+            case 0x7E:
+            case 0x46:
+            case 0x4E:
+            case 0x56:
+            case 0x5E:
+            case 0x66:
+            case 0x6E: {
+                LDrHL instruction = new LDrHL();
+                instruction.execute(registerState);
+            }break;
+            case 0x77:
+            case 0x70:
+            case 0x71:
+            case 0x72:
+            case 0x73:
+            case 0x74:
+            case 0x75: {
+                LDHLr instruction = new LDHLr();
+                instruction.execute(registerState);
+            }
         }
     }
 
     private void processedPrefixed(byte opcode, RegisterState registerState) {
         switch (opcode & 0xFF) {
-            case 0xDD:{}break;
-            case 0xFD:{}break;
+            case 0xDD:{// DD PREFIX
+                opcode = registerState.fetchWord8();
+                switch(opcode & 0xFF) {
+                    case 0x7E:
+                    case 0x46:
+                    case 0x4E:
+                    case 0x56:
+                    case 0x5E:
+                    case 0x66:
+                    case 0x6E: {
+                        LDrIXd instruction = new LDrIXd();
+                        instruction.execute(registerState);
+                    }break;
+                    case 0x77:
+                    case 0x70:
+                    case 0x71:
+                    case 0x72:
+                    case 0x73:
+                    case 0x74:
+                    case 0x75: {
+                        LDIXdr instruction = new LDIXdr();
+                        instruction.execute(registerState);
+                    }break;
+                }
+            }break;
+            case 0xFD:{// FD PREFIX
+                opcode = registerState.fetchWord8();
+                switch(opcode & 0xFF) {
+                    case 0x7E:
+                    case 0x46:
+                    case 0x4E:
+                    case 0x56:
+                    case 0x5E:
+                    case 0x66:
+                    case 0x6E: {
+                        LDrIYd instruction = new LDrIYd();
+                        instruction.execute(registerState);
+                    }break;
+                    case 0x77:
+                    case 0x70:
+                    case 0x71:
+                    case 0x72:
+                    case 0x73:
+                    case 0x74:
+                    case 0x75: {
+                        LDIYdr instruction = new LDIYdr();
+                        instruction.execute(registerState);
+                    }break;
+                }
+            }break;
             case 0x36:{}break;
             case 0x0A:{}break;
             case 0x1A:{}break;

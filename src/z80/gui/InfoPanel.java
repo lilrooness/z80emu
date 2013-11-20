@@ -18,6 +18,9 @@ public class InfoPanel extends JPanel {
     private JPanel generalRegs, specialRegs;
     private RegisterState registerState;
     private JTextField a, f, d, e, b, c , h, l;
+    private JPanel psr, pc, currentWord;
+    private JTextField psrState, pcState, currentWordState;
+    private JLabel psrLabel, pcLabel, currentWordLabel;
 
     public InfoPanel() {
         registerState = RegisterState.getInstance();
@@ -25,11 +28,11 @@ public class InfoPanel extends JPanel {
         globalLayout.setHgap(5);
         globalLayout.setVgap(5);
         setLayout(globalLayout);
-        specialRegs = new JPanel();
+        specialRegs = new JPanel(new GridLayout(3, 1));
         generalRegs = new JPanel(globalLayout);
         this.setLayout(new GridLayout(1, 2));
         generalRegs.setLayout(globalLayout);
-        specialRegs.add(new JTextArea());
+//        specialRegs.add(new JTextArea());
         GridLayout gl = new GridLayout(2,2);
         gl.setVgap(-5);
         gl.setHgap(-5);
@@ -70,6 +73,31 @@ public class InfoPanel extends JPanel {
         hl.add(new JLabel("L", JLabel.CENTER));
         hl.add(h);
         hl.add(l);
+
+        pc = new JPanel(new GridLayout(2, 1));
+        psr = new JPanel(new GridLayout(2, 1));
+        currentWord = new JPanel(new GridLayout(2, 1));
+
+        pcState = new JTextField();
+        psrState = new JTextField();
+        currentWordState = new JTextField();
+
+        pcLabel = new JLabel("PC");
+        psrLabel = new JLabel("PSR");
+        currentWordLabel = new JLabel("Current Word 8");
+
+        pc.add(pcLabel);
+        pc.add(pcState);
+
+        psr.add(psrLabel);
+        psr.add(psrState);
+
+        currentWord.add(currentWordLabel);
+        currentWord.add(currentWordState);
+
+        specialRegs.add(pc);
+        specialRegs.add(psr);
+        specialRegs.add(currentWord);
 
         generalRegs.add(af);
         generalRegs.add(de);

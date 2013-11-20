@@ -2,6 +2,7 @@ package z80.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,8 +29,17 @@ public class Window extends JFrame {
 
         add(new ControlPanel(this), BorderLayout.EAST);
         pack();
-        Thread updateLoop = new Thread(infoPanel);
-        updateLoop.start();
+
+        SwingWorker worker = new SwingWorker<Object, Object>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                while(true) {
+                    infoPanel.updateGui();
+                }
+            }
+        };
+        worker.execute();
+
         setVisible(true);
     }
 

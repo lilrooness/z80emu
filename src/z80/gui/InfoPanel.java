@@ -1,7 +1,6 @@
 package z80.gui;
 
 import z80.core.RegisterState;
-import z80.util.RadixOperations;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +12,10 @@ import java.awt.*;
  * Time: 16:19
  * To change this template use File | Settings | File Templates.
  */
-public class InfoPanel extends JPanel implements Runnable{
+public class InfoPanel extends JPanel {
 
     private JPanel af, bc, de, hl;
+    private JPanel generalRegs, specialRegs;
     private RegisterState registerState;
     private JTextField a, f, d, e, b, c , h, l;
 
@@ -25,6 +25,11 @@ public class InfoPanel extends JPanel implements Runnable{
         globalLayout.setHgap(5);
         globalLayout.setVgap(5);
         setLayout(globalLayout);
+        specialRegs = new JPanel();
+        generalRegs = new JPanel(globalLayout);
+        this.setLayout(new GridLayout(1, 2));
+        generalRegs.setLayout(globalLayout);
+        specialRegs.add(new JTextArea());
         GridLayout gl = new GridLayout(2,2);
         gl.setVgap(-5);
         gl.setHgap(-5);
@@ -66,25 +71,22 @@ public class InfoPanel extends JPanel implements Runnable{
         hl.add(h);
         hl.add(l);
 
-        add(af);
-        add(de);
-        add(bc);
-        add(hl);
+        generalRegs.add(af);
+        generalRegs.add(de);
+        generalRegs.add(bc);
+        generalRegs.add(hl);
+        add(generalRegs);
+        add(specialRegs);
     }
 
-    @Override
-    public void run() {
-
-        while(true) {
-            registerState = RegisterState.getInstance();
-            a.setText(Integer.toHexString(registerState.getA()[0] & 0xff));
-//        f.setText(Integer.toHexString(registerState.getA()[1]));
-            b.setText(Integer.toHexString(registerState.getBc()[0] & 0xff));
-            c.setText(Integer.toHexString(registerState.getBc()[1] & 0xff));
-            d.setText(Integer.toHexString(registerState.getDe()[0] & 0xff));
-            e.setText(Integer.toHexString(registerState.getDe()[1] & 0xff));
-            h.setText(Integer.toHexString(registerState.getHl()[0] & 0xff));
-            l.setText(Integer.toHexString(registerState.getHl()[1] & 0xff));
-        }
+    public void updateGui() {
+        registerState = RegisterState.getInstance();
+        a.setText(Integer.toHexString(registerState.getA()[0] & 0xff));
+        b.setText(Integer.toHexString(registerState.getBc()[0] & 0xff));
+        c.setText(Integer.toHexString(registerState.getBc()[1] & 0xff));
+        d.setText(Integer.toHexString(registerState.getDe()[0] & 0xff));
+        e.setText(Integer.toHexString(registerState.getDe()[1] & 0xff));
+        h.setText(Integer.toHexString(registerState.getHl()[0] & 0xff));
+        l.setText(Integer.toHexString(registerState.getHl()[1] & 0xff));
     }
 }

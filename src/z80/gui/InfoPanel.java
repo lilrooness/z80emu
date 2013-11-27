@@ -28,11 +28,10 @@ public class InfoPanel extends JPanel {
         globalLayout.setHgap(5);
         globalLayout.setVgap(5);
         setLayout(globalLayout);
-        specialRegs = new JPanel(new GridLayout(3, 1));
+        specialRegs = new JPanel(new GridLayout(2, 2));
         generalRegs = new JPanel(globalLayout);
         this.setLayout(new GridLayout(1, 2));
         generalRegs.setLayout(globalLayout);
-//        specialRegs.add(new JTextArea());
         GridLayout gl = new GridLayout(2,2);
         gl.setVgap(-5);
         gl.setHgap(-5);
@@ -74,17 +73,19 @@ public class InfoPanel extends JPanel {
         hl.add(h);
         hl.add(l);
 
-        pc = new JPanel(new GridLayout(2, 1));
-        psr = new JPanel(new GridLayout(2, 1));
-        currentWord = new JPanel(new GridLayout(2, 1));
+        GridLayout specialRegLayout = new GridLayout(2, 1);
+        specialRegLayout.setVgap(-5);
+        pc = new JPanel(specialRegLayout);
+        psr = new JPanel(specialRegLayout);
+        currentWord = new JPanel(specialRegLayout);
 
         pcState = new JTextField();
         psrState = new JTextField();
         currentWordState = new JTextField();
 
-        pcLabel = new JLabel("PC");
-        psrLabel = new JLabel("PSR");
-        currentWordLabel = new JLabel("Current Word 8");
+        pcLabel = new JLabel("PC", JLabel.CENTER);
+        psrLabel = new JLabel("PSR", JLabel.CENTER);
+        currentWordLabel = new JLabel("INS", JLabel.CENTER);
 
         pc.add(pcLabel);
         pc.add(pcState);

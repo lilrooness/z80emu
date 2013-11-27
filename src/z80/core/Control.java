@@ -109,7 +109,8 @@ public class Control {
             case 0x75: {
                 LDHLr instruction = new LDHLr();
                 instruction.execute(registerState);
-            }
+            }break;
+
         }
     }
 

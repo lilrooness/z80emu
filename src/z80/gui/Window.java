@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +30,7 @@ public class Window extends JFrame {
 
         add(new ControlPanel(this), BorderLayout.EAST);
         pack();
-
+        setVisible(true);
         Timer timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -39,8 +38,6 @@ public class Window extends JFrame {
             }
         });
         timer.start();
-
-        setVisible(true);
     }
 
     public IDE getIde() {

@@ -15,7 +15,7 @@ public abstract class AbstractRegisterInstruction implements Instruction {
 		return opcode.get(5, 8);
 	}
 	
-	protected static byte[] getRegisterValueByCode(BitSet code, RegisterState state) {
+	public static byte[] getRegisterValueByCode(BitSet code, RegisterState state) {
 
 		RegisterCodes c = RegisterCodes.getByCode(code);
 		if (c != null) {
@@ -39,7 +39,7 @@ public abstract class AbstractRegisterInstruction implements Instruction {
 		throw new IllegalArgumentException("Register Does Not Exist");
 	}
 
-    protected static byte[] getRegisterValueByCode(String code, RegisterState state) {
+    public static byte[] getRegisterValueByCode(String code, RegisterState state) {
 
         RegisterCodes c = RegisterCodes.getByCode(code);
         if (c != null) {

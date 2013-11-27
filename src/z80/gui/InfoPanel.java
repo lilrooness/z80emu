@@ -117,5 +117,6 @@ public class InfoPanel extends JPanel {
         e.setText(Integer.toHexString(registerState.getDe()[1] & 0xff));
         h.setText(Integer.toHexString(registerState.getHl()[0] & 0xff));
         l.setText(Integer.toHexString(registerState.getHl()[1] & 0xff));
+        pcState.setText(Integer.toHexString(registerState.getPc() & 0xff));
     }
 }

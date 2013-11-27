@@ -2,6 +2,9 @@ package z80.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,13 +32,13 @@ public class Window extends JFrame {
         add(new ControlPanel(this), BorderLayout.EAST);
         pack();
 
-        SwingUtilities.invokeLater(new Runnable() {
-
+        Timer timer = new Timer(100, new ActionListener() {
             @Override
-            public void run() {
+            public void actionPerformed(ActionEvent actionEvent) {
                 infoPanel.updateGui();
             }
         });
+        timer.start();
 
         setVisible(true);
     }

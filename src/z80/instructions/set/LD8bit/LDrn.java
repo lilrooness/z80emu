@@ -18,6 +18,7 @@ import z80.util.RadixOperations;
  * @since 01, 1976
  * @version 05, 2005
  */
+@Deprecated
 public class LDrn extends AbstractRegisterInstruction {
 
 	public static int cycles = 2;

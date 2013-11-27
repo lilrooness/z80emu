@@ -13,6 +13,7 @@ import z80.instructions.AbstractRegisterInstruction;
  * @since 01, 1976
  * @version 05, 2005
  */
+@Deprecated
 public class AddAr extends AbstractRegisterInstruction {
 	public static int cycles = 1;
 	@Override

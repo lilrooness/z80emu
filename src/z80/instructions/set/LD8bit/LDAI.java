@@ -11,6 +11,7 @@ import z80.instructions.AbstractRegisterInstruction;
  * Time: 21:45
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LDAI extends AbstractRegisterInstruction {
 
     @Override

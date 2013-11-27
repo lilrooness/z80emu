@@ -3,7 +3,7 @@ package z80.instructions.set.LD8bit;
 import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
 import z80.memory.Memory;
-
+@Deprecated
 public class LDIYdn extends AbstractRegisterInstruction {
 
 	@Override

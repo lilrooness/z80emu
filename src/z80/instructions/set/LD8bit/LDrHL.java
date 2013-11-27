@@ -21,6 +21,7 @@ import z80.util.RadixOperations;
  * @since 01, 1976
  * @version 05, 2005
  */
+@Deprecated
 public class LDrHL extends AbstractRegisterInstruction {
 
 	@Override

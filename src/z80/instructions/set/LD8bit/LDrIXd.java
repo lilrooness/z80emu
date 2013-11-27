@@ -7,7 +7,7 @@ import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
 import z80.memory.Memory;
 import z80.util.RadixOperations;
-
+@Deprecated
 public class LDrIXd extends AbstractRegisterInstruction {
 
 	@Override

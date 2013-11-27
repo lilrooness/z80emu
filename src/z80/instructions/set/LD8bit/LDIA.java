@@ -10,6 +10,7 @@ import z80.instructions.AbstractRegisterInstruction;
  * Time: 22:38
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LDIA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {

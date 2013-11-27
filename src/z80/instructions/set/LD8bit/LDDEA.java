@@ -14,6 +14,7 @@ import java.util.BitSet;
  * Time: 21:29
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LDDEA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {

@@ -11,6 +11,7 @@ import z80.instructions.AbstractRegisterInstruction;
  * Time: 16:13
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class AddAn extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {

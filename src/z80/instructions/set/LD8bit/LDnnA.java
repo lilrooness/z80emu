@@ -14,6 +14,7 @@ import java.util.BitSet;
  * Time: 21:31
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LDnnA extends AbstractRegisterInstruction {
 
     @Override

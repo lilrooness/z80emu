@@ -13,6 +13,7 @@ import z80.util.RadixOperations;
  * Time: 21:26
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LDBCA extends AbstractRegisterInstruction {
     @Override
     public void execute(RegisterState registerState) {

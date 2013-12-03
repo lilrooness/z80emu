@@ -99,4 +99,15 @@ public class Arith8Bit {
         registerState.setA(new byte[]{(byte) (registerState.getA()[0] - Memory.memory[a]), registerState.getA()[1]});
         return 5;
     }
+
+    public static int andr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
+        byte r = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
+        String rv = RadixOperations.prependZeros(Integer.toBinaryString(r & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.and(rv, acc);
+        registerState.setA(new byte[]{RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
 }

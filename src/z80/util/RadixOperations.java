@@ -116,4 +116,42 @@ public class RadixOperations {
         }
         return false;
     }
+
+    public static String and(String a, String b) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0 ;i < a.length(); i++) {
+            if(a.charAt(i) == '1' && b.charAt(i) == '1') {
+                stringBuilder.append('1');
+            } else {
+                stringBuilder.append('0');
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String or(String a, String b) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i=0; i < a.length(); i++) {
+            if(a.charAt(i) == '1' || b.charAt(i) == '1') {
+                stringBuilder.append('1');
+            } else{
+                stringBuilder.append('0');
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String xor(String a, String b) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i=0; i<a.length(); i++) {
+            if((a.charAt(i) == '1' && b.charAt(i) == '0') || (a.charAt(i) == '0' && b.charAt(i) == '1')) {
+                stringBuilder.append('1');
+            } else {
+                stringBuilder.append('0');
+            }
+        }
+        return stringBuilder.toString();
+    }
 }

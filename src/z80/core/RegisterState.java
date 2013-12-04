@@ -19,6 +19,7 @@ public class RegisterState {
 	private byte currentOpcodeByte;
     private byte i, r;
     private boolean IFF2, IFF1;
+
 	/**
 	 * always 16 bit registers
 	 */
@@ -42,6 +43,25 @@ public class RegisterState {
 	 * 
 	 */
 	private RegisterState() {}
+
+    public void dump() {
+        pc = 0;
+        ix = 0;
+        iy = 0;
+        sp = 0;
+
+        i = 0;
+        r = 0;
+
+        IFF2 = false;
+        IFF1 = false;
+
+        a = new byte[] {0, 0};
+        f = new byte[] {0, 0};
+        hl = new byte[] {0, 0};
+        de = new byte[] {0, 0};
+        bc = new byte[] {0, 0};
+    }
 
 	public byte[] getA() {
 		return a;

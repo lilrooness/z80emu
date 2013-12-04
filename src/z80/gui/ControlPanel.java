@@ -1,6 +1,7 @@
 package z80.gui;
 
 import z80.core.Control;
+import z80.core.RegisterState;
 import z80.memory.Memory;
 import z80.util.RadixOperations;
 
@@ -39,6 +40,8 @@ public class ControlPanel extends JPanel{
         tmiddle.add(run);
         bottom.add(stop);
         run.addActionListener(new EventListener());
+        step.addActionListener(new EventListener());
+        stop.addActionListener(new EventListener());
 
         add(top);
         add(tmiddle);
@@ -47,32 +50,43 @@ public class ControlPanel extends JPanel{
 
 
     private class EventListener implements ActionListener {
-
+        Control control;
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(control == null) {
+                control = new Control();
+            }
             if(e.getSource() == run) {
-                String code = parent.getIde().getInput().getText();
-                code = code.replaceAll("\\r?\\n", "");
-                BitSet processedCode = new BitSet(code.length());
-                for(int i=0; i<code.length(); i++) {
-                    if(code.charAt(i) == '1') {
-                        processedCode.set(code.length() - i, true); // read in the bits reversed, because bitset uses little endian
-                    } else if(code.charAt(i) == '0') {
-                        processedCode.set(code.length() - i, false);
-                    } else {
-                        throw new IllegalArgumentException("An illegal character "+code.charAt(i)+ "was found at position: "+i);
-                    }
+                loadCode(parent.getIde().getInput().getText());
+                control.runProgram((short)0);
+            } else if(e.getSource() == step) {
+                if(!control.isSetup()) {
+                    loadCode(parent.getIde().getInput().getText());
                 }
+                control.stepProgram((short)0);
+            } else if(e.getSource() == stop) {
+                RegisterState.getInstance().dump();
+                control = new Control();
+            }
+        }
 
-                System.out.println(processedCode.toString());
-                byte[] program = RadixOperations.toByteArray(code);
-                short codeSegmentOffset = 0;
-                for(int i=0; i<program.length; i++) {
-                    Memory.memory[codeSegmentOffset+i] = program[i];
+        public void loadCode(String code) {
+            code = code.replaceAll("\\r?\\n", "");
+            BitSet processedCode = new BitSet(code.length());
+            for(int i=0; i<code.length(); i++) {
+                if(code.charAt(i) == '1') {
+                    processedCode.set(code.length() - i, true); // read in the bits reversed, because bitset uses little endian
+                } else if(code.charAt(i) == '0') {
+                    processedCode.set(code.length() - i, false);
+                } else {
+                    throw new IllegalArgumentException("An illegal character "+code.charAt(i)+ "was found at position: "+i);
                 }
-
-                Control control = new Control();
-                control.runProgram(codeSegmentOffset);
+            }
+            System.out.println(processedCode.toString());
+            byte[] program = RadixOperations.toByteArray(code);
+            short codeSegmentOffset = 0;
+            for(int i=0; i<program.length; i++) {
+                Memory.memory[codeSegmentOffset+i] = program[i];
             }
         }
     }

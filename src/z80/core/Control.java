@@ -19,6 +19,7 @@ public class Control {
 
     private boolean isRunning = true;
     RegisterState registerState;
+    private boolean isSetup = false; // for use when stepping through code
 
     public void runProgram(short startAddress) {
         registerState = RegisterState.getInstance();
@@ -30,6 +31,21 @@ public class Control {
             } else {
                 processedPrefixed(opcode, registerState);
             }
+        }
+    }
+
+    public void stepProgram(short startAddress) {
+        if(!isSetup) {
+            registerState = RegisterState.getInstance();
+            registerState.setPc(startAddress);
+            isSetup = true;
+        }
+
+        byte opcode = registerState.fetchWord8();
+        if(!isPrefix(opcode)) {
+            processUnPrefixed(opcode, registerState);
+        } else {
+            processedPrefixed(opcode, registerState);
         }
     }
 
@@ -179,5 +195,13 @@ public class Control {
 
     private boolean isPrefix(byte opcode) {
         return false;
+    }
+
+    public boolean isSetup() {
+        return isSetup;
+    }
+
+    public void setIsSetup(boolean isSetup) {
+        this.isSetup = isSetup;
     }
 }

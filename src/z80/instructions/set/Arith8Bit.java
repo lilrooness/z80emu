@@ -105,9 +105,85 @@ public class Arith8Bit {
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
         byte r = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
         String rv = RadixOperations.prependZeros(Integer.toBinaryString(r & 0xff));
-        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
         String result = RadixOperations.and(rv, acc);
         registerState.setA(new byte[]{RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
         return 1;
+    }
+
+    public static int andn() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.and(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int andHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.and(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int orr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
+        byte r = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
+        String rv = RadixOperations.prependZeros(Integer.toBinaryString(r & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.or(rv, acc);
+        registerState.setA(new byte[]{RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int orn() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.or(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int orHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.or(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int xorr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
+        byte r = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
+        String rv = RadixOperations.prependZeros(Integer.toBinaryString(r & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.xor(rv, acc);
+        registerState.setA(new byte[]{RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int xorn() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.xor(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int xorHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
+        String result = RadixOperations.xor(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return  1;
     }
 }

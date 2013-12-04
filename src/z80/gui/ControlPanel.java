@@ -66,6 +66,7 @@ public class ControlPanel extends JPanel{
                 control.stepProgram((short)0);
             } else if(e.getSource() == stop) {
                 RegisterState.getInstance().dump();
+                Memory.zero();
                 control = new Control();
             }
         }

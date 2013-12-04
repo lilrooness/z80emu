@@ -70,6 +70,11 @@ public class ControlPanel extends JPanel{
             }
         }
 
+        /**
+         * parses text from the IDE into opcodes and loads them into
+         * a code segment in memory starting at 0
+         * @param code
+         */
         public void loadCode(String code) {
             code = code.replaceAll("\\r?\\n", "");
             BitSet processedCode = new BitSet(code.length());

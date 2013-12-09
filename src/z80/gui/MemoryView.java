@@ -27,8 +27,6 @@ public class MemoryView extends JFrame {
         setVisible(true);
     }
 
-
-
     public void updateTable() {
         for(int i=0; i<Memory.memory.length; i++) {
             memory[i][0] = i;

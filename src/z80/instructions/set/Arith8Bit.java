@@ -1,5 +1,6 @@
 package z80.instructions.set;
 
+import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 import z80.core.StatusFlags;
 import z80.instructions.AbstractRegisterInstruction;
@@ -185,5 +186,90 @@ public class Arith8Bit {
         String result = RadixOperations.xor(n, acc);
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
         return  1;
+    }
+
+    public static int cpr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String code = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String r = RadixOperations.prependZeros(Integer.toBinaryString(AbstractRegisterInstruction.getRegisterValueByCode(code.substring(5), registerState)[0]));
+        if(acc.equals(r)) {
+            RegisterState.psr.set(StatusFlags.Z.getPosition());
+        }
+        return 1;
+    }
+
+    public static int cpn() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        if(acc.equals(n)) {
+            RegisterState.psr.set(StatusFlags.Z.getPosition());
+        }
+        return 2;
+    }
+
+    public static int cpHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        if(acc.equals(n)) {
+            RegisterState.psr.set(StatusFlags.Z.getPosition());
+        }
+        return 2;
+    }
+
+    public static int cpIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIX() + d);
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[a] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        if(acc.equals(n)) {
+            RegisterState.psr.set(StatusFlags.Z.getPosition());
+        }
+        return 5;
+    }
+
+    public static int cpIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIY() + d);
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[a] & 0xff));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        if(acc.equals(n)) {
+            RegisterState.psr.set(StatusFlags.Z.getPosition());
+        }
+        return 5;
+    }
+
+    public static int incr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        String code = opcode.substring(2, 5);
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(code),
+                new byte[]{
+                        (byte) (AbstractRegisterInstruction.getRegisterValueByCode(code, registerState)[0] + 1),
+                        AbstractRegisterInstruction.getRegisterValueByCode(code, registerState)[1]
+                });
+        return 1;
+    }
+
+    public static int incHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getHl()[0]] += 1;
+        return 3;
+    }
+
+    public static int incIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getIX()] += 1;
+        return 6;
+    }
+
+    public static int incIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getIY()] += 1;
+        return 6;
     }
 }

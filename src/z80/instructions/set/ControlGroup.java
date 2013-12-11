@@ -1,11 +1,8 @@
 package z80.instructions.set;
 
-import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 import z80.core.StatusFlags;
 import z80.util.RadixOperations;
-
-import static z80.core.StatusFlags.C;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,8 +37,6 @@ public class ControlGroup {
         }
         return 1;
     }
-
-
 
     public static int scf() {
         RegisterState registerState = RegisterState.getInstance();

@@ -272,4 +272,34 @@ public class Arith8Bit {
         Memory.memory[registerState.getIY()] += 1;
         return 6;
     }
+
+    public static int decr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        String code = opcode.substring(2, 5);
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(code),
+                new byte[]{
+                        (byte) (AbstractRegisterInstruction.getRegisterValueByCode(code, registerState)[0] + 1),
+                        AbstractRegisterInstruction.getRegisterValueByCode(code, registerState)[1]
+                });
+        return 1;
+    }
+
+    public static int decHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getHl()[0]] += 1;
+        return 3;
+    }
+
+    public static int decIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getIX()] += 1;
+        return 6;
+    }
+
+    public static int decIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        Memory.memory[registerState.getIY()] += 1;
+        return 6;
+    }
 }

@@ -154,4 +154,16 @@ public class RadixOperations {
         }
         return stringBuilder.toString();
     }
+
+    public static String invert(String a) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0 ;i<a.length(); i++) {
+            if(a.charAt(i) == '1') {
+                stringBuilder.append('0');
+            } else {
+                stringBuilder.append('1');
+            }
+        }
+        return stringBuilder.toString();
+    }
 }

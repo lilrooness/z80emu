@@ -13,6 +13,11 @@ import z80.util.RadixOperations;
  */
 public class ControlGroup {
 
+    public static int daa() {
+        //TODO implement daa instruction
+        return 1;
+    }
+
     public static int cpl() {
         RegisterState registerState = RegisterState.getInstance();
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
@@ -41,6 +46,38 @@ public class ControlGroup {
     public static int scf() {
         RegisterState registerState = RegisterState.getInstance();
         registerState.psr.set(StatusFlags.C.getPosition());
+        return 1;
+    }
+
+    public static int di() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setIFF1(false);
+        registerState.setIFF2(false);
+        return 1;
+    }
+
+    public static int ei() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setIFF1(true);
+        registerState.setIFF2(true);
+        return 1;
+    }
+
+    public static int im0() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setInterruptMode((byte) 0);
+        return 1;
+    }
+
+    public static int im1() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setInterruptMode((byte) 1);
+        return 1;
+    }
+
+    public static int im2() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setInterruptMode((byte) 2);
         return 1;
     }
 }

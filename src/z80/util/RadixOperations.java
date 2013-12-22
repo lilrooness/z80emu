@@ -7,7 +7,6 @@
 package z80.util;
 
 import java.util.BitSet;
-import java.util.Stack;
 
 /**
  * <description>
@@ -17,20 +16,6 @@ import java.util.Stack;
  * @version 05, 2005
  */
 public class RadixOperations {
-//	public static short toShort(BitSet bitSet) {
-//		Stack<Boolean> stack = new Stack<>();
-//		//first reverse the bit order so the LSB is on top of the stack
-//		for(int i=0; i<bitSet.length(); i++) {
-//			stack.push(bitSet.get(i));
-//		}
-//		short sum = 0;
-//		for(int i=0; i<bitSet.length(); i++) {
-//			if(stack.pop()) {
-//				sum += 2^i;
-//			}
-//		}
-//		return sum;
-//	}
 
     public static short toShort(String bitSet) {
         short sum = 0;

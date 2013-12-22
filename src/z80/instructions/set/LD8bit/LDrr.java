@@ -6,8 +6,6 @@
  */
 package z80.instructions.set.LD8bit;
 
-import java.util.BitSet;
-
 import z80.core.RegisterCodes;
 import z80.core.RegisterState;
 import z80.instructions.AbstractRegisterInstruction;
@@ -20,6 +18,7 @@ import z80.util.RadixOperations;
  * @since 01, 1976
  * @version 05, 2005
  */
+@Deprecated
 public class LDrr extends AbstractRegisterInstruction {
 
 	public int cycles = 1;

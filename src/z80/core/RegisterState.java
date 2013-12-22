@@ -19,6 +19,7 @@ public class RegisterState {
 	private byte currentOpcodeByte;
     private byte i, r;
     private boolean IFF2, IFF1;
+    private byte interruptMode = 0;
 
 	/**
 	 * always 16 bit registers
@@ -186,5 +187,13 @@ public class RegisterState {
 
     public void setSp(short sp) {
         this.sp = sp;
+    }
+
+    public byte getInterruptMode() {
+        return interruptMode;
+    }
+
+    public void setInterruptMode(byte interruptMode) {
+        this.interruptMode = interruptMode;
     }
 }

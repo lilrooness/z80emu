@@ -30,6 +30,10 @@ public class RadixOperations {
         return sum;
     }
 
+//    public static int toInt(String bin ) {
+//        String reversed = new StringBuilder(bin).reverse().toString();
+//    }
+
     public static byte[] toByteArray(String binary) {
         byte[] bytes = new byte[binary.length() / 8];
         for(int i=0; i<binary.length() / 8; i++) {

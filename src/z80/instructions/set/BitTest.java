@@ -107,4 +107,66 @@ public class BitTest {
         Memory.memory[d + registerState.getIX()] = newValue;
         return 1;
     }
+
+    public static int setbIY() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIY()] & 0xff));
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        int bit = RadixOperations.toShort(opcode.substring(2, 5));
+        StringBuilder stringBuilder = new StringBuilder(data);
+        stringBuilder.setCharAt(bit, '1');
+        byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
+        Memory.memory[d + registerState.getIY()] = newValue;
+        return 1;
+    }
+
+    public static int resbr() {
+        RegisterState registerState = RegisterState.getInstance();
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
+        String registerValue = RadixOperations.prependZeros(Integer.toBinaryString(AbstractRegisterInstruction.getRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(5))) & 0xff));
+        int bit = RadixOperations.toShort(opcode.substring(2, 5));
+        StringBuilder stringBuilder = new StringBuilder(registerValue);
+        stringBuilder.setCharAt(bit, '0');
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(5)), RadixOperations.toByteArray(stringBuilder.toString()));
+        return 2;
+    }
+
+    public static int resbHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.indexHL() & 0xff));
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
+        int bit = RadixOperations.toShort(opcode.substring(2, 5));
+        StringBuilder stringBuilder = new StringBuilder(data);
+        stringBuilder.setCharAt(bit, '0');
+        byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
+        Memory.setIndexHL(newValue);
+        return 2;
+    }
+
+    public static int resbIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIX()] & 0xff));
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        int bit = RadixOperations.toShort(opcode.substring(2, 5));
+        StringBuilder stringBuilder = new StringBuilder(data);
+        stringBuilder.setCharAt(bit, '0');
+        byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
+        Memory.memory[d + registerState.getIX()] = newValue;
+        return 1;
+    }
+
+    public static int resbIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIY()] & 0xff));
+        String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        int bit = RadixOperations.toShort(opcode.substring(2, 5));
+        StringBuilder stringBuilder = new StringBuilder(data);
+        stringBuilder.setCharAt(bit, '0');
+        byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
+        Memory.memory[d + registerState.getIY()] = newValue;
+        return 1;
+    }
 }

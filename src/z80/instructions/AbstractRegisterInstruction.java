@@ -4,6 +4,7 @@ import java.util.BitSet;
 
 import z80.core.RegisterCodes;
 import z80.core.RegisterState;
+import z80.core.StatusFlagTests;
 
 public abstract class AbstractRegisterInstruction implements Instruction {
 
@@ -146,6 +147,28 @@ public abstract class AbstractRegisterInstruction implements Instruction {
             }
         }
         return null;
+    }
+
+    public static StatusFlagTests getFlagTest(String code) {
+        if(code.equals(StatusFlagTests.C.getCode())) {
+            return StatusFlagTests.C;
+        } else if(code.equals(StatusFlagTests.M.getCode())) {
+            return StatusFlagTests.M;
+        } else if(code.equals(StatusFlagTests.NC.getCode())) {
+            return StatusFlagTests.NC;
+        } else if(code.equals(StatusFlagTests.NZ.getCode())) {
+            return StatusFlagTests.NZ;
+        } else if(code.equals(StatusFlagTests.P.getCode())) {
+            return StatusFlagTests.P;
+        } else if(code.equals(StatusFlagTests.PE.getCode())) {
+            return StatusFlagTests.PE;
+        } else if(code.equals(StatusFlagTests.PO)) {
+            return StatusFlagTests.PO;
+        } else if(code.equals(StatusFlagTests.Z)) {
+            return StatusFlagTests.Z;
+        }else {
+            return null;
+        }
     }
 
 }

@@ -37,4 +37,17 @@ public class Memory {
     public static byte index16Bit(String bin) {
         return memory[RadixOperations.toShort(bin)];
     }
+
+    public static void push(byte value) {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setSp((short) (registerState.getSp() - 1));
+        Memory.memory[registerState.getSp()] = value;
+    }
+
+    public static byte pull() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte value = Memory.memory[registerState.getSp()];
+        registerState.setSp((short) (registerState.getSp() + 1));
+        return value;
+    }
 }

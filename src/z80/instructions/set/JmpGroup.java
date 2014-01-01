@@ -1,6 +1,5 @@
 package z80.instructions.set;
 
-import sun.jvm.hotspot.asm.Register;
 import z80.core.RegisterState;
 import z80.core.StatusFlagTests;
 import z80.core.StatusFlags;
@@ -86,5 +85,26 @@ public class JmpGroup {
         }
         registerState.fetchWord8();
         return 3;
+    }
+
+    public static int JPHL() {
+        RegisterState registerState = RegisterState.getInstance();
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1]));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0]));
+        short hl = RadixOperations.toShort(msb + lsb);
+        registerState.setPc(hl);
+        return 1;
+    }
+
+    public static int JPIX() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setPc(registerState.getIX());
+        return 2;
+    }
+
+    public static int JPIY() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setPc(registerState.getIY());
+        return 2;
     }
 }

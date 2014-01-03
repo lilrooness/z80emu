@@ -47,6 +47,18 @@ public class RadixOperations {
         return bytes;
     }
 
+    public static short byteArrayToShort(byte[] array) {
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(array[0] & 0xff));
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(array[1] & 0xff));
+        return RadixOperations.toShort(msb + lsb);
+    }
+
+    public static byte[] shortToByteArray(short value) {
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(value & 0xff));
+        String msb = bitString.substring(0, 8);
+        String lsb = bitString.substring(8);
+        return new byte[] {(byte) RadixOperations.toShort(msb), (byte) RadixOperations.toShort(lsb)};
+    }
 
     public static boolean checkEquals(BitSet bitset1, BitSet bitSet2) {
         for(int i=0; i<bitset1.length(); i++) {

@@ -149,6 +149,30 @@ public abstract class AbstractRegisterInstruction implements Instruction {
         return null;
     }
 
+    public static void set16BitRegisterValue(RegisterState registerState, RegisterCodes c, byte[] value) {
+        if(c !=  null) {
+            switch (c) {
+                case HL: {
+                    registerState.setHl(value);
+                }
+                case DE: {
+                    registerState.setDe(value);
+                }
+                case BC: {
+                    registerState.setBc(value);
+                }
+            }
+        }
+    }
+
+    public static boolean isSPCode(RegisterCodes c) {
+        if(c == RegisterCodes.SP) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static StatusFlagTests getFlagTest(String code) {
         if(code.equals(StatusFlagTests.C.getCode())) {
             return StatusFlagTests.C;

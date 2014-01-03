@@ -52,4 +52,14 @@ public class CallGroup {
         }
         return 1;
     }
+
+    public static int reti() {
+        return ret() + 1;
+    }
+
+    public static int retn() {
+        RegisterState registerState = RegisterState.getInstance();
+        registerState.setIFF1(registerState.isIFF2());
+        return ret() + 1;
+    }
 }

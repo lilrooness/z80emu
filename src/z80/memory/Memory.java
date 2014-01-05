@@ -26,10 +26,26 @@ public class Memory {
         return index16Bit(bin);
     }
 
+    public static byte indexDe() {
+        RegisterState registerState = RegisterState.getInstance();
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[0] & 0xff));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1] & 0xff));
+        String bin = lsb + msb;
+        return index16Bit(bin);
+    }
+
     public static void setIndexHL(byte value) {
         RegisterState registerState = RegisterState.getInstance();
         String lsb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xff));
         String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
+        String bin = lsb + msb;
+        memory[RadixOperations.toShort(bin)] = value;
+    }
+
+    public static void setIndexDE(byte value) {
+        RegisterState registerState = RegisterState.getInstance();
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[0] & 0xff));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1] & 0xff));
         String bin = lsb + msb;
         memory[RadixOperations.toShort(bin)] = value;
     }

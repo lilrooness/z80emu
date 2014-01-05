@@ -16,6 +16,13 @@ public class RegisterState {
 	private byte[] bc = new byte[2];
 	private byte[] de = new byte[2];
 	private byte[] hl = new byte[2];
+
+    private byte[] a_ = new byte[2];
+    private byte[] f_ = new byte[2];
+    private byte[] bc_ = new byte[2];
+    private byte[] de_ = new byte[2];
+    private byte[] hl_ = new byte[2];
+
 	private byte currentOpcodeByte;
     private byte i, r;
     private boolean IFF2, IFF1;
@@ -195,5 +202,45 @@ public class RegisterState {
 
     public void setInterruptMode(byte interruptMode) {
         this.interruptMode = interruptMode;
+    }
+
+    public byte[] getA_() {
+        return a_;
+    }
+
+    public void setA_(byte[] a_) {
+        this.a_ = a_;
+    }
+
+    public byte[] getF_() {
+        return f_;
+    }
+
+    public void setF_(byte[] f_) {
+        this.f_ = f_;
+    }
+
+    public byte[] getBc_() {
+        return bc_;
+    }
+
+    public void setBc_(byte[] bc_) {
+        this.bc_ = bc_;
+    }
+
+    public byte[] getDe_() {
+        return de_;
+    }
+
+    public void setDe_(byte[] de_) {
+        this.de_ = de_;
+    }
+
+    public byte[] getHl_() {
+        return hl_;
+    }
+
+    public void setHl_(byte[] hl_) {
+        this.hl_ = hl_;
     }
 }

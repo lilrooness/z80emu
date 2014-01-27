@@ -7,7 +7,6 @@
 package z80.core;
 
 import z80.instructions.set.LD8Bit;
-import z80.instructions.set.LD8bit.*;
 
 /**
  * <description>
@@ -93,8 +92,7 @@ public class Control {
             case 0x62:
             case 0x63:
             case 0x65: {
-                LDrr instruction = new LDrr();
-                instruction.execute(registerState);
+                LD8Bit.LDrr(registerState);
             }break;
             //LD r, n
             case 0x3E:
@@ -104,8 +102,7 @@ public class Control {
             case 0x1E:
             case 0x26:
             case 0x2E: {
-                LDrn instruction = new LDrn();
-                instruction.execute(registerState);
+                LD8Bit.LDrn(registerState);
             }break;
             case 0x7E:
             case 0x46:
@@ -114,8 +111,7 @@ public class Control {
             case 0x5E:
             case 0x66:
             case 0x6E: {
-                LDrHL instruction = new LDrHL();
-                instruction.execute(registerState);
+                LD8Bit.DLrHL(registerState);
             }break;
             case 0x77:
             case 0x70:
@@ -124,8 +120,7 @@ public class Control {
             case 0x73:
             case 0x74:
             case 0x75: {
-                LDHLr instruction = new LDHLr();
-                instruction.execute(registerState);
+                LD8Bit.LDHLr(registerState);
             }break;
 
         }

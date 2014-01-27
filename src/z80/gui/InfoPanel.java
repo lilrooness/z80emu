@@ -53,6 +53,15 @@ public class InfoPanel extends JPanel {
         h = new JTextField("0xff");
         l = new JTextField("0xff");
 
+        a.setEditable(false);
+        f.setEditable(false);
+        d.setEditable(false);
+        e.setEditable(false);
+        b.setEditable(false);
+        c.setEditable(false);
+        h.setEditable(false);
+        l.setEditable(false);
+
         af.add(new JLabel("A", JLabel.CENTER));
         af.add(new JLabel("F", JLabel.CENTER));
         af.add(a);
@@ -82,6 +91,10 @@ public class InfoPanel extends JPanel {
         pcState = new JTextField();
         psrState = new JTextField();
         currentWordState = new JTextField();
+
+        pcState.setEditable(false);
+        psrState.setEditable(false);
+        currentWordState.setEditable(false);
 
         pcLabel = new JLabel("PC", JLabel.CENTER);
         psrLabel = new JLabel("PSR", JLabel.CENTER);
@@ -118,5 +131,6 @@ public class InfoPanel extends JPanel {
         h.setText(Integer.toHexString(registerState.getHl()[0] & 0xff));
         l.setText(Integer.toHexString(registerState.getHl()[1] & 0xff));
         pcState.setText(Integer.toHexString(registerState.getPc() & 0xff));
+        currentWordState.setText(Integer.toHexString(registerState.getCurrentWord8() & 0xff));
     }
 }

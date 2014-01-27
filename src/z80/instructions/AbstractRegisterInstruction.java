@@ -91,7 +91,7 @@ public abstract class AbstractRegisterInstruction implements Instruction {
 			default:{
 				throw new IllegalArgumentException("Register Does Not Exist");
 			}
-			}	
+			}
 		}
 	}
 

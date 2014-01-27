@@ -16,10 +16,12 @@ public class MemoryView extends JFrame {
     JTable memoryTable;
     Integer[][] memory;
     String[] columnNames;
+    JCheckBox viewHex;
 
     public MemoryView() {
         setSize(100, 480);
         memory = new Integer[Memory.memory.length][2];
+        viewHex = new JCheckBox();
         columnNames = new String[] {"Address", "Value"};
         updateTable();
 

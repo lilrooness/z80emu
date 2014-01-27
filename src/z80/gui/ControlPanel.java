@@ -19,6 +19,7 @@ import java.util.BitSet;
  * To change this template use File | Settings | File Templates.
  */
 public class ControlPanel extends JPanel{
+
     private JButton step, pause, run, stop;
     private JPanel top, tmiddle, bottom;
     private Window parent;

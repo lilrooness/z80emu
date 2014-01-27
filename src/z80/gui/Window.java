@@ -22,6 +22,8 @@ public class Window extends JFrame {
     private JMenu memory;
     private JMenuItem showMemory;
     private MemoryView memoryView;
+    private JMenu help;
+    private JMenuItem linkMenu;
 
     public Window(int width, int height) {
         globalContainer = new JPanel();
@@ -32,10 +34,15 @@ public class Window extends JFrame {
 
         menuBar = new JMenuBar();
         memory = new JMenu("Memory");
+        help = new JMenu("Help");
         showMemory = new JMenuItem("Show");
         memory.add(showMemory);
 
         menuBar.add(memory);
+        menuBar.add(help);
+
+        linkMenu = new JMenuItem("Z80 Docs");
+        help.add(linkMenu);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         globalContainer.add(infoPanel, BorderLayout.NORTH);
@@ -49,6 +56,13 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 memoryView = new MemoryView();
+            }
+        });
+
+        linkMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(null, "<html><body><a href=\"http://www.zilog.com/appnotes_download.php?FromPage=DirectLink&dn=UM0080&ft=User%20Manual&f=YUhSMGNEb3ZMM2QzZHk1NmFXeHZaeTVqYjIwdlpHOWpjeTk2T0RBdmRXMHdNRGd3TG5Ca1pnPT0=\">Z80 Manual</a></body></html>", "Docs", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 

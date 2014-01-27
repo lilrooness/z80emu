@@ -189,7 +189,6 @@ public class Control {
             case 0xED:{}break;
         }
     }
-
     private boolean isPrefix(byte opcode) {
         return false;
     }

@@ -6,6 +6,7 @@
  */
 package z80.core;
 
+import z80.instructions.set.ExTransSearchGroup;
 import z80.instructions.set.LD16;
 import z80.instructions.set.LD8Bit;
 
@@ -130,7 +131,18 @@ public class Control {
             case 0x75: {
                 LD8Bit.LDHLr(registerState);
             }break;
-
+            case (byte) 0xC5:
+            case (byte) 0xD5:
+            case (byte) 0xE5:
+            case (byte) 0xF5: {
+                LD16.pushqq();
+            }break;
+            case (byte) 0xC1:
+            case (byte) 0xD1:
+            case (byte) 0xE1:
+            case (byte) 0xF1: {
+                LD16.popqq();
+            }
         }
     }
 
@@ -162,7 +174,28 @@ public class Control {
                     }break;
                     case 0x21: {
                         LD16.LDIXnn();
-                    }
+                    }break;
+                    case 0x2A: {
+                        LD16.LDIX_nn_();
+                    }break;
+                    case 0x22: {
+                        LD16.LD_nn_IX();
+                    }break;
+                    case 0xF9: {
+                        LD16.LDSPIX();
+                    }break;
+                    case 0xE5: {
+                        LD16.pushIX();
+                    }break;
+                    case 0xE1: {
+                        LD16.popIX();
+                    }break;
+                    case 0xFD: {
+                        LD16.popIY();
+                    }break;
+                    case 0xE3: {
+                        ExTransSearchGroup.exSpIX();
+                    }break;
                 }
             }break;
             case 0xFD:{// FD PREFIX
@@ -189,6 +222,25 @@ public class Control {
                     case 0x36: {
                         LD8Bit.LDIYdn(registerState);
                     }break;
+                    case 0x21: {
+                        LD16.LDIYnn();
+                    }break;
+                    case 0x2A: {
+                        LD16.LDIY_nn_();
+                    }break;
+                    case 0x22: {
+                        LD16.LD_nn_IY();
+                    }break;
+                    case 0xF9: {
+                        LD16.LDSPIY();
+                    }break;
+                    case 0xE5: {
+                        LD16.pushIY();
+                    }break;
+                    case 0xE3: {
+                        ExTransSearchGroup.exSpIY();
+                    }break;
+
                 }
             }break;
             case 0x36:{
@@ -228,7 +280,64 @@ public class Control {
                     case 0x4f: {
                         LD8Bit.LDRA(registerState);
                     }
+                    case 0x4B:
+                    case 0x5B:
+                    case 0x6B:
+                    case 0x7B: {
+                        LD16.LDdd_nn_();
+                    }break;
+                    case 0x43:
+                    case 0x53:
+                    case 0x63:
+                    case 0x73: {
+                        LD16.LD_nn_dd();
+                    }break;
+                    case (byte) 0xA0: {
+                        ExTransSearchGroup.ldi();
+                    }break;
+                    case (byte) 0xB0: {
+                        ExTransSearchGroup.ldir();
+                    }break;
+                    case (byte) 0xA8: {
+                        ExTransSearchGroup.ldd();
+                    }break;
+                    case (byte) 0xB8: {
+                        ExTransSearchGroup.lddr();
+                    }break;
+                    case (byte) 0xA1: {
+                        ExTransSearchGroup.cpi();
+                    }break;
+                    case (byte) 0xB1: {
+                        ExTransSearchGroup.cpir();
+                    }break;
+                    case (byte) 0xA9: {
+                        ExTransSearchGroup.cpd();
+                    }break;
+                    case (byte) 0xB9: {
+                        ExTransSearchGroup.cpdr();
+                    }
                 }
+            }break;
+            case 0x2A: {
+                LD16.HL_nn_();
+            }break;
+            case 0x22: {
+                LD16.LD_nn_hl();
+            }break;
+            case 0xF9: {
+                LD16.LDSPHL();
+            }break;
+            case 0xEB: {
+                ExTransSearchGroup.exDeHl();
+            }break;
+            case 0x08: {
+                ExTransSearchGroup.exAfAf();
+            }break;
+            case 0xD9: {
+                ExTransSearchGroup.exx();
+            }break;
+            case 0xE3: {
+                ExTransSearchGroup.exSpHl();
             }break;
         }
     }

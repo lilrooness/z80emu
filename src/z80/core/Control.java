@@ -6,6 +6,7 @@
  */
 package z80.core;
 
+import z80.instructions.set.LD16;
 import z80.instructions.set.LD8Bit;
 
 /**
@@ -51,6 +52,13 @@ public class Control {
 
     private void processUnPrefixed(byte opcode, RegisterState registerState) {
         switch (opcode) {
+            case 0x01:
+            case 0x17:
+            case 0x33:
+            case 0x49: {
+                LD16.LDddnn();
+            }
+
             //HALT
             case 0x76: {
                 isRunning = false;
@@ -149,6 +157,12 @@ public class Control {
                     case 0x75: {
                         LD8Bit.LDIXdr(registerState);
                     }break;
+                    case 0x36: {
+                        LD8Bit.LDIXdn(registerState);
+                    }break;
+                    case 0x21: {
+                        LD16.LDIXnn();
+                    }
                 }
             }break;
             case 0xFD:{// FD PREFIX
@@ -172,16 +186,50 @@ public class Control {
                     case 0x75: {
                         LD8Bit.LDIYdr(registerState);
                     }break;
+                    case 0x36: {
+                        LD8Bit.LDIYdn(registerState);
+                    }break;
                 }
             }break;
-            case 0x36:{}break;
-            case 0x0A:{}break;
-            case 0x1A:{}break;
-            case 0x3A:{}break;
-            case 0x02:{}break;
-            case 0x12:{}break;
-            case 0x32:{}break;
-            case 0xED:{}break;
+            case 0x36:{
+                opcode = registerState.fetchWord8();
+                LD8Bit.LDHLn(registerState);
+            }break;
+            case 0x0A:{
+                LD8Bit.LDABC(registerState);
+            }break;
+            case 0x1A:{
+                LD8Bit.LDADE(registerState);
+            }break;
+            case 0x3A:{
+                LD8Bit.LDAnn(registerState);
+            }break;
+            case 0x02:{
+                LD8Bit.LDBCA(registerState);
+            }break;
+            case 0x12:{
+                LD8Bit.LDDEA(registerState);
+            }break;
+            case 0x32:{
+                LD8Bit.LDnnA(registerState);
+            }break;
+            case 0xED:{
+                opcode = registerState.fetchWord8();
+                switch (opcode) {
+                    case 0x57: {
+                        LD8Bit.LDAI(registerState);
+                    }break;
+                    case 0x5f: {
+                        LD8Bit.LDAR(registerState);
+                    }break;
+                    case 0x47: {
+                        LD8Bit.LDIA(registerState);
+                    }break;
+                    case 0x4f: {
+                        LD8Bit.LDRA(registerState);
+                    }
+                }
+            }break;
         }
     }
     private boolean isPrefix(byte opcode) {

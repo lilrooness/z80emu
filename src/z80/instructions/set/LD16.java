@@ -15,7 +15,7 @@ import z80.util.RadixOperations;
  */
 public class LD16 {
 
-    public int LDddnn() {
+    public static int LDddnn() {
         RegisterState registerState = RegisterState.getInstance();
 
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
@@ -29,7 +29,7 @@ public class LD16 {
         return 2;
     }
 
-    public int LDIXnn() {
+    public static int LDIXnn() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -40,7 +40,7 @@ public class LD16 {
         return 4;
     }
 
-    public int LDIYnn() {
+    public static int LDIYnn() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -56,7 +56,7 @@ public class LD16 {
      * of index register HL, the contents of memory address nn + 1 are
      * loaded into the high order byte of register HL
      */
-    public int HL_nn_() {
+    public static int HL_nn_() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -79,7 +79,7 @@ public class LD16 {
      * are loaded into the high order byte of register pair dd
      * @return
      */
-    public int LDdd_nn_() {
+    public static int LDdd_nn_() {
         RegisterState registerState = RegisterState.getInstance();
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString((registerState.getCurrentWord8() & 0xff)));
 
@@ -103,7 +103,7 @@ public class LD16 {
      * into the high order byte of the register pair IX
      * @return
      */
-    public int LDIX_nn_() {
+    public static int LDIX_nn_() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -126,7 +126,7 @@ public class LD16 {
      * into the low order byte of register pair IY
      * @return
      */
-    public int LDIY_nn_() {
+    public static int LDIY_nn_() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -150,7 +150,7 @@ public class LD16 {
      *
      * @return
      */
-    public int LD_nn_hl() {
+    public static int LD_nn_hl() {
         RegisterState registerState = RegisterState.getInstance();
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         String n2 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -167,7 +167,7 @@ public class LD16 {
      * is loaded into memory address nn+1
      * @return
      */
-    public int LD_nn_dd() {
+    public static int LD_nn_dd() {
         RegisterState registerState = RegisterState.getInstance();
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
 
@@ -183,7 +183,7 @@ public class LD16 {
         return 6;
     }
 
-    public int LD_nn_IX() {
+    public static int LD_nn_IX() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -203,7 +203,7 @@ public class LD16 {
         return 6;
     }
 
-    public int LD_nn_IY() {
+    public static int LD_nn_IY() {
         RegisterState registerState = RegisterState.getInstance();
 
         String n1 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
@@ -223,7 +223,7 @@ public class LD16 {
         return 6;
     }
 
-    public int LDSPHL() {
+    public static int LDSPHL() {
         RegisterState registerState = RegisterState.getInstance();
         String h = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xff));
         String l = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
@@ -233,19 +233,19 @@ public class LD16 {
         return 1;
     };
 
-    public int LDSPIX() {
+    public static int LDSPIX() {
         RegisterState registerState = RegisterState.getInstance();
         registerState.setSp(registerState.getIX());
         return 2;
     }
 
-    public int LDSPIY() {
+    public static int LDSPIY() {
         RegisterState registerState = RegisterState.getInstance();
         registerState.setSp(registerState.getIY());
         return 2;
     }
 
-    public int pushqq() {
+    public static int pushqq() {
         RegisterState registerState = RegisterState.getInstance();
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
         RegisterCodes.getByCode(opcode.substring(2, 4));
@@ -259,7 +259,7 @@ public class LD16 {
         return 3;
     }
 
-    public int pushIX() {
+    public static int pushIX() {
         RegisterState registerState = RegisterState.getInstance();
         String IX = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIX() & 0xff));
 
@@ -273,7 +273,7 @@ public class LD16 {
         return 4;
     }
 
-    public int pushIY() {
+    public static int pushIY() {
         RegisterState registerState = RegisterState.getInstance();
         String IY = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIY() & 0xff));
 
@@ -287,7 +287,7 @@ public class LD16 {
         return 4;
     }
 
-    public int popqq() {
+    public static int popqq() {
         RegisterState registerState = RegisterState.getInstance();
 
         String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
@@ -302,7 +302,7 @@ public class LD16 {
         return 3;
     }
 
-    public int popIX() {
+    public static int popIX() {
         RegisterState registerState = RegisterState.getInstance();
 
         String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
@@ -315,7 +315,7 @@ public class LD16 {
         return 4;
     }
 
-    public int popIY() {
+    public static int popIY() {
         RegisterState registerState = RegisterState.getInstance();
 
         String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));

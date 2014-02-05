@@ -93,7 +93,7 @@ public class ControlPanel extends JPanel{
             byte[] program = RadixOperations.toByteArray(code);
             short codeSegmentOffset = 0;
             for(int i=0; i<program.length; i++) {
-                Memory.memory[codeSegmentOffset+i] = program[i];
+                Memory.setMemoryAt((short) (codeSegmentOffset+i), program[i]);
             }
         }
     }

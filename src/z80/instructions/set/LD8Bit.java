@@ -18,12 +18,12 @@ public class LD8Bit {
 
     public static void LDABC(RegisterState registerState) {
         String BC = Integer.toBinaryString(registerState.getBc()[0]) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[1]));
-        registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(BC)]});
+        registerState.setA(new byte[]{Memory.getMemoryAt(RadixOperations.toShort(BC))});
     }
 
     public static void LDADE(RegisterState registerState) {
         String DE = Integer.toBinaryString(registerState.getDe()[0]) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1]));
-        registerState.setA(new byte[] {Memory.memory[RadixOperations.toShort(DE)]});
+        registerState.setA(new byte[] {Memory.getMemoryAt(RadixOperations.toShort(DE))});
     }
 
     public static void LDAI(RegisterState registerState) {
@@ -52,7 +52,7 @@ public class LD8Bit {
         byte n2 = registerState.fetchWord8();
         byte n1 = registerState.fetchWord8();
         String nn = Integer.toBinaryString(n2 & 0xff) + RadixOperations.prependZeros(Integer.toBinaryString(n1 & 0xff));
-        registerState.setA(new byte[]{Memory.memory[RadixOperations.toShort(nn)]});
+        registerState.setA(new byte[]{Memory.getMemoryAt(RadixOperations.toShort(nn))});
     }
 
     public static void LDAR(RegisterState registerState) {
@@ -79,21 +79,22 @@ public class LD8Bit {
     public static void LDBCA(RegisterState registerState) {
         byte value = registerState.getA()[0];
         String bc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[0])) +
-                RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[1]));
-        Memory.memory[RadixOperations.toShort(bc)] = value;
+        RadixOperations.prependZeros(Integer.toBinaryString(registerState.getBc()[1]));
+        Memory.setMemoryAt(RadixOperations.toShort(bc), value);
     }
 
     public static void LDDEA(RegisterState registerState) {
         byte value = registerState.getA()[0];
         String D = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[0] & 0xff));
         String E = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1] & 0xff));
-        Memory.memory[RadixOperations.toShort(D+E)] = value;
+//        Memory.memory[RadixOperations.toShort(D+E)] = value;
+        Memory.setMemoryAt(RadixOperations.toShort(D+E), value);
     }
 
     public static void LDHLn(RegisterState registerState) {
         byte value = registerState.fetchWord8();
         String HL = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xFF)) + RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1]));
-        Memory.memory[RadixOperations.toShort(HL)] = value;
+        Memory.setMemoryAt(RadixOperations.toShort(HL), value);
     }
 
     public static void LDHLr(RegisterState registerState) {
@@ -102,7 +103,7 @@ public class LD8Bit {
         short index = RadixOperations.toShort(HL);
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
         byte value = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
-        Memory.memory[index] = value;
+        Memory.setMemoryAt(index, value);
     }
 
     public static void execute(RegisterState registerState) {
@@ -111,7 +112,7 @@ public class LD8Bit {
         short index = RadixOperations.toShort(HL);
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
         byte value = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
-        Memory.memory[index] = value;
+        Memory.setMemoryAt(index, value);
     }
 
     public static void LDIA(RegisterState registerState) {
@@ -122,34 +123,36 @@ public class LD8Bit {
         byte d = registerState.fetchWord8();
         byte n = registerState.fetchWord8();
 
-        Memory.memory[registerState.getIX()+d] = n;
+//        Memory.memory[registerState.getIX()+d] = n;
+        Memory.setMemoryAt((short) (registerState.getIX()+d), n);
     }
 
     public static void LDIXdr(RegisterState registerState) {
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
         byte value = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
-        Memory.memory[registerState.getIX()+registerState.fetchWord8()] = value;
+//        Memory.memory[registerState.getIX()+registerState.fetchWord8()] = value;
+        Memory.setMemoryAt((short) (registerState.getIX()+registerState.fetchWord8()), value);
     }
 
     public static void LDIYdn(RegisterState registerState) {
         byte d = registerState.fetchWord8();
         byte n = registerState.fetchWord8();
-        Memory.memory[registerState.getIY()+d] = n;
+        Memory.setMemoryAt((short) (registerState.getIY()+d), n);
     }
 
     public static void LDIYdr(RegisterState registerState) {
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
         byte value = AbstractRegisterInstruction.getRegisterValueByCode(opcode.substring(5), registerState)[0];
-
-        Memory.memory[registerState.getIY()+registerState.fetchWord8()] = value;
+        Memory.setMemoryAt((short) (registerState.getIY()+registerState.fetchWord8()), value);
+//        Memory.memory[registerState.getIY()+registerState.fetchWord8()] = value;
     }
 
     public static void LDnnA(RegisterState registerState) {
         byte value = registerState.getA()[0];
         String n2 = Integer.toBinaryString(registerState.fetchWord8() & 0xFF);
         String n1 = Integer.toBinaryString(registerState.fetchWord8() & 0xFF);
-
-        Memory.memory[RadixOperations.toShort(RadixOperations.prependZeros(n2) + RadixOperations.prependZeros(n1))] = value;
+        Memory.setMemoryAt(RadixOperations.toShort(RadixOperations.prependZeros(n2) + RadixOperations.prependZeros(n1)), value);
+//        Memory.memory[] = value;
     }
 
     public static void LDRA(RegisterState registerState) {
@@ -161,7 +164,8 @@ public class LD8Bit {
         String l = Integer.toBinaryString(registerState.getHl()[0] & 0xFF);
         String h = Integer.toBinaryString(registerState.getHl()[1] & 0xFF);
         String hl = RadixOperations.prependZeros(h) + RadixOperations.prependZeros(l);
-        byte value = Memory.memory[RadixOperations.toShort(hl)];//use value of HL to index into memory
+//        byte value = Memory.memory[RadixOperations.toShort(hl)];//use value of HL to index into memory
+        byte value = Memory.getMemoryAt(RadixOperations.toShort(hl));
         AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(registerCode), new byte[]{value});
     }
 
@@ -169,14 +173,14 @@ public class LD8Bit {
 //		BitSet opcode = BitSet.valueOf(new byte[]{registerState.getCurrentWord8()});
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
         byte d = registerState.fetchWord8();
-        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 5)), new byte[] {Memory.memory[d + registerState.getIX()]});
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 5)), new byte[] {Memory.getMemoryAt((short) (d + registerState.getIX()))});
     }
 
     public static void LDrIYd(RegisterState registerState) {
 //		BitSet opcode = BitSet.valueOf(new byte[]{registerState.getCurrentWord8()});
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xFF));
         byte d = registerState.fetchWord8();
-        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 5)), new byte[]{Memory.memory[d+registerState.getIY()]});
+        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 5)), new byte[]{Memory.getMemoryAt((short) (d+registerState.getIY()))});
     }
 
     public static void LDrn(RegisterState registerState) {

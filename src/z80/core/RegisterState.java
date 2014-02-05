@@ -116,12 +116,12 @@ public class RegisterState {
 	}
 	
 	public byte fetchWord8() {
-        this.currentOpcodeByte = Memory.memory[pc];
-        return Memory.memory[pc++];
+        this.currentOpcodeByte = Memory.getMemoryAt(pc);
+        return Memory.getMemoryAt(pc++);
 	}
 	
 	public byte[] fetchWord16() {
-		return new byte[] {Memory.memory[pc++], Memory.memory[pc++]};
+		return new byte[] {Memory.getMemoryAt(pc++), Memory.getMemoryAt(pc++)};
 	}
 	
 	public short getIX() {

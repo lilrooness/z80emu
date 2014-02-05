@@ -20,19 +20,19 @@ public class MemoryView extends JFrame {
 
     public MemoryView() {
         setSize(100, 480);
-        memory = new Integer[Memory.memory.length][2];
+        memory = new Integer[Memory.getMemoryLength()][2];
         viewHex = new JCheckBox();
         columnNames = new String[] {"Address", "Value"};
         updateTable();
-
+        memoryTable.setModel(new MemoryTableModel(columnNames, memory));
         add(new JScrollPane(memoryTable));
         setVisible(true);
     }
 
     public void updateTable() {
-        for(int i=0; i<Memory.memory.length; i++) {
+        for(int i=0; i<Memory.getMemoryLength(); i++) {
             memory[i][0] = i;
-            memory[i][1] = (int)Memory.memory[i] & 0xff;
+            memory[i][1] = (int)Memory.getMemoryAt(i) & 0xff;
         }
         memoryTable = new JTable(memory, columnNames);
     }

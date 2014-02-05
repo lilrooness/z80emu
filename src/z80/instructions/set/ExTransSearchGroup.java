@@ -68,12 +68,14 @@ public class ExTransSearchGroup {
     public static int exSpHl() {
         RegisterState registerState = RegisterState.getInstance();
 
-        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()]));
-        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp() + 1]));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp())));
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getSp() + 1))));
 
 
-        Memory.memory[registerState.getSp()] = registerState.getHl()[1];
-        Memory.memory[registerState.getSp() + 1] = registerState.getHl()[0];
+        Memory.setMemoryAt(registerState.getSp(), registerState.getHl()[1]);
+//        Memory.memory[registerState.getSp()] = registerState.getHl()[1];
+        Memory.setMemoryAt((short) (registerState.getSp() + 1), registerState.getHl()[0]);
+//        Memory.memory[registerState.getSp() + 1] = registerState.getHl()[0];
 
         registerState.setSp(RadixOperations.toShort(msb + lsb));
         return 5;
@@ -83,16 +85,19 @@ public class ExTransSearchGroup {
         RegisterState registerState = RegisterState.getInstance();
         String IX = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIX() & 0xff));
 
-        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
-        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp() + 1] & 0xff));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getSp() + 1)) & 0xff));
 
         registerState.setSp(RadixOperations.toShort(msb + lsb));
 
         msb = IX.substring(0, 4);
         lsb = IX.substring(4);
 
-        Memory.memory[registerState.getSp()] = (byte) RadixOperations.toShort(msb);
-        Memory.memory[registerState.getSp() + 1] = (byte) RadixOperations.toShort(lsb);
+
+        Memory.setMemoryAt(registerState.getSp(), (byte) RadixOperations.toShort(msb));
+//        Memory.memory[] = ;
+        Memory.setMemoryAt((short) (registerState.getSp() + 1), (byte) RadixOperations.toShort(lsb));
+//        Memory.memory[] = ;
         return 6;
     }
 
@@ -100,16 +105,18 @@ public class ExTransSearchGroup {
         RegisterState registerState = RegisterState.getInstance();
         String IY = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getIY() & 0xff));
 
-        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
-        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp() + 1] & 0xff));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getSp() + 1)) & 0xff));
 
         registerState.setIY(RadixOperations.toShort(msb + lsb));
 
         msb = IY.substring(0, 4);
         lsb = IY.substring(4);
 
-        Memory.memory[registerState.getSp()] = (byte) RadixOperations.toShort(msb);
-        Memory.memory[registerState.getSp() + 1] = (byte) RadixOperations.toShort(lsb);
+        Memory.setMemoryAt(registerState.getSp(), (byte) RadixOperations.toShort(msb));
+//        Memory.memory[registerState.getSp()] = (byte) RadixOperations.toShort(msb);
+        Memory.setMemoryAt((short) (registerState.getSp() + 1), (byte) RadixOperations.toShort(lsb));
+//        Memory.memory[] = ;
         return 6;
     }
 

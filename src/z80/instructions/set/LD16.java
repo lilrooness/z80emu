@@ -66,8 +66,8 @@ public class LD16 {
 
         byte[] set = new byte[2];
 
-        set[1] = Memory.memory[nns];
-        set[0] = Memory.memory[nns + 1];
+        set[1] = Memory.getMemoryAt(nns);
+        set[0] = Memory.getMemoryAt((short) (nns + 1));
         registerState.setHl(set);
         return 5;
     }
@@ -90,8 +90,9 @@ public class LD16 {
 
         byte[] set = new byte[2];
 
-        set[1] = Memory.memory[nns];
-        set[0] = Memory.memory[nns + 1];
+        set[1] = Memory.getMemoryAt(nns);
+
+        set[0] = Memory.getMemoryAt((short) (nns + 1));
 
         AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
         return 5;
@@ -112,8 +113,8 @@ public class LD16 {
 
         short nns = RadixOperations.toShort(nn);
         String[] value = new String[2];
-        value[1] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[nns] & 0xff));
-        value[0] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[nns+1] & 0xff));
+        value[1] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(nns) & 0xff));
+        value[0] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (nns+1)) & 0xff));
         String valueTogether = value[0] + value[1];
 
         registerState.setIX(RadixOperations.toShort(valueTogether));
@@ -135,8 +136,8 @@ public class LD16 {
 
         short nns = RadixOperations.toShort(nn);
         String[] value = new String[2];
-        value[1] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[nns] & 0xff));
-        value[0] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[nns+1] & 0xff));
+        value[1] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(nns) & 0xff));
+        value[0] =  RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (nns+1)) & 0xff));
         String valueTogether = value[0] + value[1];
 
         registerState.setIY(RadixOperations.toShort(valueTogether));
@@ -156,8 +157,8 @@ public class LD16 {
         String n2 = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
 
         short nn = RadixOperations.toShort(n2 + n1);
-        Memory.memory[nn] = registerState.getHl()[0];
-        Memory.memory[nn+1] = registerState.getHl()[1];
+        Memory.setMemoryAt(nn, registerState.getHl()[0]);
+        Memory.setMemoryAt((short) (nn+1), registerState.getHl()[1]);
         return 5;
     }
 
@@ -178,8 +179,8 @@ public class LD16 {
         byte[] set;
 
         set = AbstractRegisterInstruction.get16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)));
-        Memory.memory[nn] = set[0];
-        Memory.memory[nn + 1] = set[1];
+        Memory.setMemoryAt(nn, set[0]);
+        Memory.setMemoryAt((short) (nn + 1), set[1]);
         return 6;
     }
 
@@ -197,8 +198,8 @@ public class LD16 {
         short ixls = RadixOperations.toShort(ixl);
         short ixhs = RadixOperations.toShort(ixh);
 
-        Memory.memory[nn] = (byte)ixhs;
-        Memory.memory[nn + 1] = (byte)ixls;
+        Memory.setMemoryAt(nn, (byte)ixhs);
+        Memory.setMemoryAt((short) (nn + 1), (byte)ixls);
 
         return 6;
     }
@@ -217,8 +218,8 @@ public class LD16 {
         short ixls = RadixOperations.toShort(ixl);
         short ixhs = RadixOperations.toShort(ixh);
 
-        Memory.memory[nn] = (byte)ixhs;
-        Memory.memory[nn + 1] = (byte)ixls;
+        Memory.setMemoryAt(nn, (byte)ixhs);
+        Memory.setMemoryAt((short) (nn + 1), (byte)ixls);
 
         return 6;
     }
@@ -252,9 +253,9 @@ public class LD16 {
 
         byte[] value = AbstractRegisterInstruction.get16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)));
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = value[0];
+        Memory.setMemoryAt(registerState.getSp(), value[0]);
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = value[1];
+        Memory.setMemoryAt(registerState.getSp(), value[1]);
 
         return 3;
     }
@@ -266,9 +267,9 @@ public class LD16 {
         String I = IX.substring(0,5);
         String X = IX.substring(5);
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(I);
+        Memory.setMemoryAt(registerState.getSp(), (byte)RadixOperations.toShort(I));
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(X);
+        Memory.setMemoryAt(registerState.getSp(), (byte)RadixOperations.toShort(X));
 
         return 4;
     }
@@ -280,9 +281,9 @@ public class LD16 {
         String I = IY.substring(0,5);
         String Y = IY.substring(5);
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(I);
+        Memory.setMemoryAt(registerState.getSp(), (byte)RadixOperations.toShort(I));
         registerState.setSp((short) (registerState.getSp() - 1));
-        Memory.memory[registerState.getSp()] = (byte)RadixOperations.toShort(Y);
+        Memory.setMemoryAt(registerState.getSp(), (byte)RadixOperations.toShort(Y));
 
         return 4;
     }
@@ -290,9 +291,9 @@ public class LD16 {
     public static int popqq() {
         RegisterState registerState = RegisterState.getInstance();
 
-        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
-        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
 
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
@@ -305,9 +306,9 @@ public class LD16 {
     public static int popIX() {
         RegisterState registerState = RegisterState.getInstance();
 
-        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
-        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
 
         short value = RadixOperations.toShort(high + low);
@@ -318,9 +319,9 @@ public class LD16 {
     public static int popIY() {
         RegisterState registerState = RegisterState.getInstance();
 
-        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String low = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
-        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getSp()] & 0xff));
+        String high = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getSp()) & 0xff));
         registerState.setSp((short) (registerState.getSp() + 1));
 
         short value = RadixOperations.toShort(high + low);

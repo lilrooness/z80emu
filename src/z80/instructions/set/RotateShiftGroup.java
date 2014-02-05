@@ -99,18 +99,18 @@ public class RotateShiftGroup {
     public static int rlcIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.rlc(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int rlcIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.rlc(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -140,18 +140,18 @@ public class RotateShiftGroup {
     public static int rlIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.rl(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int rlIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.rlc(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -181,18 +181,18 @@ public class RotateShiftGroup {
     public static int rrcIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.rrc(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int rrcIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.rrc(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -222,18 +222,18 @@ public class RotateShiftGroup {
     public static int rrIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.rr(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int rrIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.rr(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -263,18 +263,18 @@ public class RotateShiftGroup {
     public static int slaIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.sla(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int slaIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.sla(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -304,18 +304,18 @@ public class RotateShiftGroup {
     public static int sraIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.sra(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int sraIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.sra(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
@@ -345,18 +345,18 @@ public class RotateShiftGroup {
     public static int srlIXd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIX() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIX() + d)) & 0xff));
         String newString = RotateShiftGroup.srl(bitString);
-        Memory.memory[registerState.getIX() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIX() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 
     public static int srlIYd() {
         RegisterState registerState = RegisterState.getInstance();
         int d = registerState.fetchWord8();
-        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getIY() + d] & 0xff));
+        String bitString = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (registerState.getIY() + d)) & 0xff));
         String newString = RotateShiftGroup.srl(bitString);
-        Memory.memory[registerState.getIY() + d] = (byte) RadixOperations.toShort(newString);
+        Memory.setMemoryAt((short) (registerState.getIY() + d), (byte) RadixOperations.toShort(newString));
         return 6;
     }
 

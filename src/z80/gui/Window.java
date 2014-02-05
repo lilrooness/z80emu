@@ -72,9 +72,9 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 infoPanel.updateGui();
-                if(memoryView != null) {
-                    memoryView.updateTable();
-                }
+//                if(memoryView != null) {
+//                    memoryView.updateTable();
+//                }
             }
         });
         timer.start();

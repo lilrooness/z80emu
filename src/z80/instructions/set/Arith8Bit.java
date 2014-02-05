@@ -39,7 +39,8 @@ public class Arith8Bit {
         String nHigh = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xff));
         String nLow = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
         String index = nHigh + nLow;
-        byte n = Memory.memory[RadixOperations.toShort(index)];
+//        byte n = Memory.memory[RadixOperations.toShort(index)];
+        byte n = Memory.getMemoryAt(RadixOperations.toShort(index));
         registerState.setA(new byte[] {(byte) (registerState.getA()[0] +n),registerState.getA()[1]});
     }
 
@@ -47,7 +48,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIX() + d);
-        registerState.setA(new byte[]{(byte) (registerState.getA()[0] + Memory.memory[a]), registerState.getA()[1]});
+        registerState.setA(new byte[]{(byte) (registerState.getA()[0] + Memory.getMemoryAt(a)), registerState.getA()[1]});
         return 5;
     }
 
@@ -55,7 +56,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIY() + d);
-        registerState.setA(new byte[]{(byte) (registerState.getA()[0] + Memory.memory[a]), registerState.getA()[1]});
+        registerState.setA(new byte[]{(byte) (registerState.getA()[0] + Memory.getMemoryAt(a)), registerState.getA()[1]});
         return 5;
     }
 
@@ -80,7 +81,8 @@ public class Arith8Bit {
         String nHigh = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[0] & 0xff));
         String nLow = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
         String index = nHigh + nLow;
-        byte n = Memory.memory[RadixOperations.toShort(index)];
+//        byte n = Memory.memory[RadixOperations.toShort(index)];
+        byte n = Memory.getMemoryAt(RadixOperations.toShort(index));
         registerState.setA(new byte[] {(byte) (registerState.getA()[0] - n),registerState.getA()[1]});
         return 2;
     }
@@ -89,7 +91,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIX() + d);
-        registerState.setA(new byte[]{(byte) (registerState.getA()[0] - Memory.memory[a]), registerState.getA()[1]});
+        registerState.setA(new byte[]{(byte) (registerState.getA()[0] - Memory.getMemoryAt(a)), registerState.getA()[1]});
         return 5;
     }
 
@@ -97,7 +99,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIY() + d);
-        registerState.setA(new byte[]{(byte) (registerState.getA()[0] - Memory.memory[a]), registerState.getA()[1]});
+        registerState.setA(new byte[]{(byte) (registerState.getA()[0] - Memory.getMemoryAt(a)), registerState.getA()[1]});
         return 5;
     }
 
@@ -123,7 +125,7 @@ public class Arith8Bit {
 
     public static int andHL() {
         RegisterState registerState = RegisterState.getInstance();
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getHl()[0]) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
         String result = RadixOperations.and(n, acc);
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
@@ -152,7 +154,7 @@ public class Arith8Bit {
 
     public static int orHL() {
         RegisterState registerState = RegisterState.getInstance();
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getHl()[0]) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
         String result = RadixOperations.or(n, acc);
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
@@ -181,7 +183,7 @@ public class Arith8Bit {
 
     public static int xorHL() {
         RegisterState registerState = RegisterState.getInstance();
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getHl()[0]) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
         String result = RadixOperations.xor(n, acc);
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
@@ -211,7 +213,7 @@ public class Arith8Bit {
 
     public static int cpHL() {
         RegisterState registerState = RegisterState.getInstance();
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[registerState.getHl()[0]] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getHl()[0]) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
         if(acc.equals(n)) {
             RegisterState.psr.set(StatusFlags.Z.getPosition());
@@ -223,7 +225,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIX() + d);
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[a] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
         if(acc.equals(n)) {
             RegisterState.psr.set(StatusFlags.Z.getPosition());
@@ -235,7 +237,7 @@ public class Arith8Bit {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
         short a = (short) (registerState.getIY() + d);
-        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[a] & 0xff));
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
         if(acc.equals(n)) {
             RegisterState.psr.set(StatusFlags.Z.getPosition());
@@ -257,19 +259,22 @@ public class Arith8Bit {
 
     public static int incHL() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getHl()[0]] += 1;
+//        Memory.getMemoryAt()[] += 1;
+        Memory.setMemoryAt(registerState.getHl()[0], (byte) (Memory.getMemoryAt(registerState.getHl()[0]) + 1));
         return 3;
     }
 
     public static int incIXd() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getIX()] += 1;
+//        Memory.memory[registerState.getIX()] += 1;
+        Memory.setMemoryAt(registerState.getIX(), (byte) (Memory.getMemoryAt(registerState.getIX()) + 1));
         return 6;
     }
 
     public static int incIYd() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getIY()] += 1;
+//        Memory.memory[] += 1;
+        Memory.setMemoryAt(registerState.getIY(), (byte) (Memory.getMemoryAt(registerState.getIY()) + 1));
         return 6;
     }
 
@@ -287,19 +292,22 @@ public class Arith8Bit {
 
     public static int decHL() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getHl()[0]] += 1;
+//        Memory.memory[] += 1;
+        Memory.setMemoryAt(registerState.getHl()[0], (byte) (Memory.getMemoryAt(registerState.getHl()[0]) + 1));
         return 3;
     }
 
     public static int decIXd() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getIX()] += 1;
+//        Memory.memory[registerState.getIX()] += 1;
+        Memory.setMemoryAt(registerState.getIX(), (byte) (Memory.getMemoryAt(registerState.getIX()) + 1));
         return 6;
     }
 
     public static int decIYd() {
         RegisterState registerState = RegisterState.getInstance();
-        Memory.memory[registerState.getIY()] += 1;
+//        Memory.memory[registerState.getIY()] += 1;
+        Memory.setMemoryAt(registerState.getIY(), (byte) (Memory.getMemoryAt(registerState.getIY()) + 1));
         return 6;
     }
 }

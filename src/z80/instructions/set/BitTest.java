@@ -48,7 +48,7 @@ public class BitTest {
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         int d = registerState.fetchWord8();
         int ixd = d + registerState.getIX();
-        String bin = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[ixd] & 0xff));
+        String bin = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) ixd) & 0xff));
         if(bin.charAt(bit) == '1') {
             registerState.psr.set(StatusFlags.Z.getPosition());
         } else {
@@ -63,7 +63,7 @@ public class BitTest {
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         int d = registerState.fetchWord8();
         int iyd = d + registerState.getIY();
-        String bin = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[iyd] & 0xff));
+        String bin = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) iyd) & 0xff));
         if(bin.charAt(bit) == '1') {
             registerState.psr.set(StatusFlags.Z.getPosition());
         } else {
@@ -98,26 +98,27 @@ public class BitTest {
     public static int setbIXd() {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
-        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIX()] & 0xff));
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (d + registerState.getIX())) & 0xff));
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         StringBuilder stringBuilder = new StringBuilder(data);
         stringBuilder.setCharAt(bit, '1');
         byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
-        Memory.memory[d + registerState.getIX()] = newValue;
+//        Memory.memory[] = newValue;
+        Memory.setMemoryAt((short) (d + registerState.getIX()), newValue);
         return 1;
     }
 
     public static int setbIY() {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
-        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIY()] & 0xff));
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (d + registerState.getIY())) & 0xff));
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         StringBuilder stringBuilder = new StringBuilder(data);
         stringBuilder.setCharAt(bit, '1');
         byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
-        Memory.memory[d + registerState.getIY()] = newValue;
+        Memory.setMemoryAt((short) (d + registerState.getIY()), newValue);
         return 1;
     }
 
@@ -147,26 +148,28 @@ public class BitTest {
     public static int resbIXd() {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
-        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIX()] & 0xff));
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (d + registerState.getIX())) & 0xff));
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         StringBuilder stringBuilder = new StringBuilder(data);
         stringBuilder.setCharAt(bit, '0');
         byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
-        Memory.memory[d + registerState.getIX()] = newValue;
+//        Memory.memory[d + registerState.getIX()] = newValue;
+        Memory.setMemoryAt((short) (d + registerState.getIX()), newValue);
         return 1;
     }
 
     public static int resbIYd() {
         RegisterState registerState = RegisterState.getInstance();
         byte d = registerState.fetchWord8();
-        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.memory[d + registerState.getIY()] & 0xff));
+        String data = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt((short) (d + registerState.getIY())) & 0xff));
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         int bit = RadixOperations.toShort(opcode.substring(2, 5));
         StringBuilder stringBuilder = new StringBuilder(data);
         stringBuilder.setCharAt(bit, '0');
         byte newValue = RadixOperations.toByteArray(stringBuilder.toString())[0];
-        Memory.memory[d + registerState.getIY()] = newValue;
+//        Memory.memory[d + registerState.getIY()] = newValue;
+        Memory.setMemoryAt((short) (d + registerState.getIY()), newValue);
         return 1;
     }
 }

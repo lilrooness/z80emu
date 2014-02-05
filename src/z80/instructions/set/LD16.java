@@ -25,7 +25,7 @@ public class LD16 {
         byte n1s =(byte) RadixOperations.toShort(n1);
         byte n2s =(byte) RadixOperations.toShort(n2);
 
-        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), new byte[] {n2s, n1s});
+        AbstractRegisterInstruction.set16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), new byte[] {n2s, n1s});
         return 2;
     }
 
@@ -94,7 +94,7 @@ public class LD16 {
 
         set[0] = Memory.getMemoryAt((short) (nns + 1));
 
-        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
+        AbstractRegisterInstruction.set16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
         return 5;
     }
 
@@ -299,7 +299,7 @@ public class LD16 {
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8() & 0xff));
         byte[] set = new byte[] {(byte)RadixOperations.toShort(high), (byte)RadixOperations.toShort(low)};
 
-        AbstractRegisterInstruction.setRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
+        AbstractRegisterInstruction.set16BitRegisterValue(registerState, RegisterCodes.getByCode(opcode.substring(2, 4)), set);
         return 3;
     }
 

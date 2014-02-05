@@ -14,7 +14,7 @@ public class MemoryTableModel extends AbstractTableModel implements PropertyChan
     private String[] columnNames;
     private Object[][] data;
 
-    private boolean hexView;
+    public static boolean hexView;
 
     public MemoryTableModel(String[] columnNames, Object[][] data) {
         this.columnNames = columnNames;

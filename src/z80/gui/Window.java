@@ -1,10 +1,16 @@
 package z80.gui;
 
+import com.sun.java.swing.plaf.motif.resources.motif_de;
+import z80.modules.Module;
+import z80.modules.ModuleController;
+import z80.modules.impls.assembler.Assembler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +30,10 @@ public class Window extends JFrame {
     private MemoryView memoryView;
     private JMenu help;
     private JMenuItem linkMenu;
+    private JMenu modules;
+    private ArrayList<String> moduleNames;
+
+    private ModuleController moduleController;
 
     public Window(int width, int height) {
         globalContainer = new JPanel();
@@ -66,6 +76,8 @@ public class Window extends JFrame {
             }
         });
 
+        addModules();
+
         pack();
         setVisible(true);
         Timer timer = new Timer(100, new ActionListener() {
@@ -78,6 +90,31 @@ public class Window extends JFrame {
             }
         });
         timer.start();
+    }
+
+    public void addModules() {
+        moduleController = new ModuleController();
+        modules = new JMenu("Modules");
+
+        addModule(new Assembler());
+
+        menuBar.add(modules);
+    }
+
+    public void addModule(Module module) {
+        moduleController.addModule(module);
+        final String name = module.getName();
+        JMenuItem menuItem = new JMenuItem(module.getName());
+        menuItem.putClientProperty("name", module.getName());
+
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                moduleController.getModule((String)((JMenuItem)actionEvent.getSource()).getClientProperty("name"));
+            }
+        });
+
+        modules.add(menuItem);
     }
 
     public IDE getIde() {

@@ -1,15 +1,13 @@
 package z80.gui;
 
-import com.sun.java.swing.plaf.motif.resources.motif_de;
 import z80.modules.Module;
 import z80.modules.ModuleController;
-import z80.modules.impls.assembler.Assembler;
+import z80.modules.impls.assembler.AssemblerModule;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -96,21 +94,21 @@ public class Window extends JFrame {
         moduleController = new ModuleController();
         modules = new JMenu("Modules");
 
-        addModule(new Assembler());
+        addModule(new AssemblerModule());
 
         menuBar.add(modules);
     }
 
     public void addModule(Module module) {
         moduleController.addModule(module);
-        final String name = module.getName();
         JMenuItem menuItem = new JMenuItem(module.getName());
         menuItem.putClientProperty("name", module.getName());
 
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                moduleController.getModule((String)((JMenuItem)actionEvent.getSource()).getClientProperty("name"));
+                moduleController.getModule((String)((JMenuItem)actionEvent.getSource()).getClientProperty("name"))
+                        .onActivate();
             }
         });
 
@@ -119,10 +117,6 @@ public class Window extends JFrame {
 
     public IDE getIde() {
         return ide;
-    }
-
-    public InfoPanel getInfoPanel() {
-        return infoPanel;
     }
 
     public static void main(String[] args) {

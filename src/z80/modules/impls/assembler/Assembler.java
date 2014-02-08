@@ -1,39 +1,25 @@
 package z80.modules.impls.assembler;
 
-import z80.modules.AbstractModule;
-
 /**
  * Created by Joe on 08/02/2014.
  */
-public class Assembler extends AbstractModule {
+public class Assembler {
 
     public Assembler() {
-        this.name = "Assembler";
-        this.active = false;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public void onClockCycle() {
 
     }
 
-    @Override
-    public void onActivate() {
-        this.active = true;
-    }
+    public String assemble(String assembly) {
 
-    @Override
-    public void onDisable() {
+        StringBuilder binary;
+        String[] instructions = assembly.split("\n");
 
-    }
+        for(int i =0; i<instructions.length; i++) {
+            if(instructions[i].startsWith(InstructionType.LD.getType())) {
+                
+            }
+        }
 
-    @Override
-    public boolean isActive() {
-        return this.active;
+        return "";
     }
 }

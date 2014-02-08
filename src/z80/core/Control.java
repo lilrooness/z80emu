@@ -19,6 +19,7 @@ import z80.instructions.set.LD8Bit;
  */
 public class Control {
 
+    //implemented instructions up to page 110
     private boolean isRunning = true;
     RegisterState registerState;
     private boolean isSetup = false; // for use when stepping through code

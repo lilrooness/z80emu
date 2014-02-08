@@ -7,7 +7,7 @@ public interface Module {
 
     public String getName();
 
-    public void onClockCycle();
+    public void onUpdate();
 
     public void onActivate();
 

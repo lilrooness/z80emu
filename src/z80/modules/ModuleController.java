@@ -22,7 +22,7 @@ public class ModuleController {
 
     public void clockModules() {
         for(int i=0; i<modules.size(); i++) {
-            modules.get(i).onClockCycle();
+            modules.get(i).onUpdate();
         }
     }
 

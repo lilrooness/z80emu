@@ -111,6 +111,18 @@ public class RadixOperations {
         return binString;
     }
 
+    public static String prependZeros(String binString, int prefferedLength) {
+        if(binString.length() < prefferedLength) {
+            int diff = prefferedLength - binString.length();
+            String prepend = "";
+            for(int i=0; i<diff; i++) {
+                prepend = prepend + "0";
+            }
+            return prepend+binString;
+        }
+        return binString;
+    }
+
     public static boolean getBit(String binString, int index) {
         if(binString.charAt(index) == '1') {
             return true;

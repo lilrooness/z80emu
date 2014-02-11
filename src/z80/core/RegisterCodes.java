@@ -6,12 +6,14 @@ import java.util.BitSet;
 
 public enum RegisterCodes {
 
-	A("111"),B("000"),C("001"),D("010"),E("011"),H("100"),L("101"),BC("00"),DE("01"),HL("10"),SP("11");
+	A("111", "A"),B("000", "B"),C("001", "C"),D("010", "D"),E("011", "E"),H("100", "H"),L("101", "L"),BC("00", "BC"),DE("01", "DE"),HL("10", "HL"),SP("11", "SP");
 
 	private BitSet bitSet;
     private String bitString;
+    private String name;
 
-	private RegisterCodes(String code) {
+	private RegisterCodes(String code, String name) {
+        this.name = name;
         this.bitString = code;
 		this.bitSet = new BitSet(3);
 		String[] split = code.split("");
@@ -44,5 +46,17 @@ public enum RegisterCodes {
             }
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBitString() {
+        return bitString;
+    }
+
+    public static String getByName(String name) {
+        return RegisterCodes.valueOf(name.toUpperCase()).getBitString();
     }
 }

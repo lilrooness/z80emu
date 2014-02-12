@@ -46,11 +46,10 @@ public class Control {
         }
 
         byte opcode = registerState.fetchWord8();
-        if(!isPrefix(opcode)) {
+
             processUnPrefixed(opcode, registerState);
-        } else {
             processedPrefixed(opcode, registerState);
-        }
+
     }
 
     private void processUnPrefixed(byte opcode, RegisterState registerState) {
@@ -235,6 +234,9 @@ public class Control {
             case (byte) 0xB6: {
                 Arith8Bit.orHL();
             }break;
+            case 0x32:{
+                LD8Bit.LDnnA(registerState);
+            }break;
 //            case (byte)
         }
     }
@@ -389,9 +391,6 @@ public class Control {
             }break;
             case 0x12:{
                 LD8Bit.LDDEA(registerState);
-            }break;
-            case 0x32:{
-                LD8Bit.LDnnA(registerState);
             }break;
             case 0xED:{
                 opcode = registerState.fetchWord8();

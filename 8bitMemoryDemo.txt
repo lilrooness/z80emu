@@ -1,0 +1,5 @@
+LD B, 9h
+LD A, B
+LD (0ch), A
+LD A, 01h
+LD A, (0ch)

@@ -23,6 +23,7 @@ public class Assembler {
     Pattern ld8bitRegToMemoryOffset = Pattern.compile("(\\([ABCDEHLIXIY]{2}\\+[0-9]+h\\)),([ABCDEHL]{1})");
     Pattern ld8bitToMemoryDirect = Pattern.compile("(\\([ABCDEHL]{2}\\)),([0-9]+h)");
     Pattern ld8bitToMemoryOffsetDirect = Pattern.compile("(\\([ABCDEHLIXIY]{2}\\)),([0-9]+h)");
+    Pattern ld8bitregToMemoryLocation = Pattern.compile("(\\([0-9a-f]+h\\)),([ABCDEHLIXIY]{1})");
 
     Pattern ld16bitDirect = Pattern.compile("([ABCDEHL]{2}),([0-9a-f]+h)"); // LD HL, 54
     Pattern ld16bit = Pattern.compile("([ABCDEHL]{2}),([ABCDEHL]{2})"); // LD HL, BC
@@ -48,11 +49,11 @@ public class Assembler {
 
     private String compileInstruction(String instruction) {
 
-        String opcode = null;
+        String opcode = "";
         Matcher matcher;
 
         String type = String.valueOf(instruction.subSequence(0, 3)).trim();
-        String remaining = instruction.substring(3).trim();
+        String remaining = instruction.substring(3).trim().replaceAll(" ", "");
 
         switch (InstructionType.valueOf(type)) {
             case LD: {
@@ -78,7 +79,7 @@ public class Assembler {
 
                     opcode = "00111010"+add;
 
-                } else if(ld8bitIndirectOffset.matcher(remaining).matches()) {
+                } else if((matcher = ld8bitIndirectOffset.matcher(remaining)).matches()) {
 
                     String reg = RegisterCodes.valueOf(matcher.group(1)).getBitString();
                     String indexReg = RegisterCodes.valueOf(matcher.group(2).substring(0, 2)).getName();
@@ -88,6 +89,15 @@ public class Assembler {
                     } else if(indexReg.equals("IX")) {
                         opcode = "";
                     }
+                } else if((matcher = ld8bitRegToMemory.matcher(remaining)).matches()) {
+
+                    String reg = RegisterCodes.valueOf(matcher.group(2)).getBitString();
+                    opcode = "01110" + reg;
+
+                }else if((matcher = ld8bitregToMemoryLocation.matcher(remaining)).matches()) {
+
+                    String location = hexToBinAddress(matcher.group(1));
+                    opcode = "00110010"+location;
 
                 } else if(ld16bit.matcher(remaining).matches()) {
 

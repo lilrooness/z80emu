@@ -1,5 +1,7 @@
 package z80.modules.impls.assembler;
 
+import z80.gui.ControlPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +32,7 @@ public class AssemblerGUI extends JFrame {
         compile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                assembler.assemble(jTextArea.getText());
+                ControlPanel.loadCode(assembler.assemble(jTextArea.getText()));
             }
         });
 

@@ -19,6 +19,11 @@ public class Assembler {
     Pattern ld8bitMemoryDirect = Pattern.compile("([ABCDEHL]{1}),(\\([0-9a-f]+h\\))");
     Pattern ld8bitIndirectOffset = Pattern.compile("([ABCDEHL]{1}),(\\([ABCDEHLIXIY]{2}\\+[0-9]+h\\))"); // LD A, (IX + 5)
 
+    Pattern ld8bitRegToMemory = Pattern.compile("(\\([ABCDEHL]{2}\\)),([ABCDEHLIXIY]{1})");
+    Pattern ld8bitRegToMemoryOffset = Pattern.compile("(\\([ABCDEHLIXIY]{2}\\+[0-9]+h\\)),([ABCDEHL]{1})");
+    Pattern ld8bitToMemoryDirect = Pattern.compile("(\\([ABCDEHL]{2}\\)),([0-9]+h)");
+    Pattern ld8bitToMemoryOffsetDirect = Pattern.compile("(\\([ABCDEHLIXIY]{2}\\)),([0-9]+h)");
+
     Pattern ld16bitDirect = Pattern.compile("([ABCDEHL]{2}),([0-9a-f]+h)"); // LD HL, 54
     Pattern ld16bit = Pattern.compile("([ABCDEHL]{2}),([ABCDEHL]{2})"); // LD HL, BC
     Pattern ld16bitIndirect = Pattern.compile("([ABCDEHL]{2}),(\\([ABCDEHLIXIY]{2}\\))"); // LD BC, (HL)
@@ -74,7 +79,15 @@ public class Assembler {
                     opcode = "00111010"+add;
 
                 } else if(ld8bitIndirectOffset.matcher(remaining).matches()) {
-                    
+
+                    String reg = RegisterCodes.valueOf(matcher.group(1)).getBitString();
+                    String indexReg = RegisterCodes.valueOf(matcher.group(2).substring(0, 2)).getName();
+                    String d = hexToBin(matcher.group(2).substring(remaining.indexOf("+")+1));
+                    if(indexReg.equals("IY")) {
+                        opcode = "11011101"+"01"+reg+"110"+d;
+                    } else if(indexReg.equals("IX")) {
+                        opcode = "";
+                    }
 
                 } else if(ld16bit.matcher(remaining).matches()) {
 

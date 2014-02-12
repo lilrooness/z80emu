@@ -6,6 +6,7 @@
  */
 package z80.core;
 
+import z80.instructions.set.Arith8Bit;
 import z80.instructions.set.ExTransSearchGroup;
 import z80.instructions.set.LD16;
 import z80.instructions.set.LD8Bit;
@@ -143,7 +144,98 @@ public class Control {
             case (byte) 0xE1:
             case (byte) 0xF1: {
                 LD16.popqq();
-            }
+            }break;
+            case (byte) 0x87:
+            case (byte) 0x80:
+            case (byte) 0x81:
+            case (byte) 0x82:
+            case (byte) 0x83:
+            case (byte) 0x84:
+            case (byte) 0x85: {
+                Arith8Bit.AddAr();
+            }break;
+            case (byte) 0xC6: {
+                Arith8Bit.AddAn();
+            }break;
+            case (byte) 0x86: {
+                Arith8Bit.addAHL();
+            }break;
+            case (byte) 0x88:
+            case (byte) 0x89:
+            case (byte) 0x8A:
+            case (byte) 0x8B:
+            case (byte) 0x8C:
+            case (byte) 0x8D:
+            case (byte) 0x8F: {
+                Arith8Bit.AddAr();
+            }break;
+            case (byte) 0xCE: {
+                Arith8Bit.AddAn();
+            }break;
+            case (byte) 0x8E: {
+                Arith8Bit.addAHL();
+            }break;
+            case (byte) 0x90:
+            case (byte) 0x91:
+            case (byte) 0x92:
+            case (byte) 0x93:
+            case (byte) 0x94:
+            case (byte) 0x95:
+            case (byte) 0x97: {
+                Arith8Bit.subr();
+            }break;
+            case (byte) 0xD6: {
+                Arith8Bit.subn();
+            }break;
+            case (byte) 0x96: {
+                Arith8Bit.subHL();
+            }break;
+            case (byte) 0x98:
+            case (byte) 0x99:
+            case (byte) 0x9A:
+            case (byte) 0x9B:
+            case (byte) 0x9C:
+            case (byte) 0x9D:
+            case (byte) 0x9F: {
+                Arith8Bit.subr();
+            }break;
+            case (byte) 0xDE: {
+                Arith8Bit.subn();
+            }break;
+            case (byte) 0x9E: {
+                Arith8Bit.subHL();
+            }break;
+            case (byte) 0xA0:
+            case (byte) 0xA1:
+            case (byte) 0xA2:
+            case (byte) 0xA3:
+            case (byte) 0xA4:
+            case (byte) 0xA5:
+            case (byte) 0xA7: {
+                Arith8Bit.andr();
+            }break;
+            case (byte) 0xE6: {
+                Arith8Bit.andn();
+            }break;
+            case (byte) 0xA6: {
+                Arith8Bit.andHL();
+            }break;
+            case (byte) 0xB0:
+            case (byte) 0xB1:
+            case (byte) 0xB2:
+            case (byte) 0xB3:
+            case (byte) 0xB4:
+            case (byte) 0xB5:
+            case (byte) 0xB7: {
+                Arith8Bit.orr();
+            }break;
+            case (byte) 0xF6: {
+                Arith8Bit.orn();
+            }break;
+            case (byte) 0xB6: {
+                Arith8Bit.orHL();
+            }break;
+//            case (byte)
         }
     }
 
@@ -197,6 +289,24 @@ public class Control {
                     case 0xE3: {
                         ExTransSearchGroup.exSpIX();
                     }break;
+                    case 0x86: {
+                        Arith8Bit.addIXd();
+                    }break;
+                    case 0x8E: {
+                        Arith8Bit.addIXd();
+                    }break;
+                    case 0x96: {
+                        Arith8Bit.subIXd();
+                    }break;
+                    case 0x9E: {
+                        Arith8Bit.subIXd();
+                    }break;
+                    case 0xA6: {
+                        Arith8Bit.andIXd();
+                    }break;
+                    case 0xB6: {
+                        Arith8Bit.orIXd();
+                    }break;
                 }
             }break;
             case 0xFD:{// FD PREFIX
@@ -241,7 +351,24 @@ public class Control {
                     case 0xE3: {
                         ExTransSearchGroup.exSpIY();
                     }break;
-
+                    case 0x86: {
+                        Arith8Bit.addIYd();
+                    }break;
+                    case 0x8E: {
+                        Arith8Bit.addIYd();
+                    }break;
+                    case 0x96: {
+                        Arith8Bit.subIYd();
+                    }break;
+                    case 0x9E: {
+                        Arith8Bit.subIYd();
+                    }break;
+                    case 0xA6: {
+                        Arith8Bit.andIYd();
+                    }break;
+                    case 0xB6: {
+                        Arith8Bit.orIYd();
+                    }break;
                 }
             }break;
             case 0x36:{

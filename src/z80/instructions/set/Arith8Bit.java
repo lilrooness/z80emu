@@ -132,6 +132,32 @@ public class Arith8Bit {
         return 1;
     }
 
+    public static int andIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIX() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.and(n, acc);
+
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int andIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIY() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.and(n, acc);
+
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
     public static int orr() {
         RegisterState registerState = RegisterState.getInstance();
         String opcode = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getCurrentWord8()));
@@ -157,6 +183,32 @@ public class Arith8Bit {
         String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(registerState.getHl()[0]) & 0xff));
         String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0] & 0xff));
         String result = RadixOperations.or(n, acc);
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int orIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIX() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.or(n, acc);
+
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int orIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIY() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.or(n, acc);
+
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
         return 1;
     }
@@ -188,6 +240,32 @@ public class Arith8Bit {
         String result = RadixOperations.xor(n, acc);
         registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
         return  1;
+    }
+
+    public static int xorIXd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIX() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.xor(n, acc);
+
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
+    }
+
+    public static int xorIYd() {
+        RegisterState registerState = RegisterState.getInstance();
+        byte d = registerState.fetchWord8();
+        short a = (short) (registerState.getIY() + d);
+
+        String n = RadixOperations.prependZeros(Integer.toBinaryString(Memory.getMemoryAt(a + d)));
+        String acc = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getA()[0]));
+        String result = RadixOperations.xor(n, acc);
+
+        registerState.setA(new byte[] {RadixOperations.toByteArray(result)[0], registerState.getA()[1]});
+        return 1;
     }
 
     public static int cpr() {

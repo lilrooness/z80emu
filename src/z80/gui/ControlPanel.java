@@ -49,6 +49,31 @@ public class ControlPanel extends JPanel{
         add(bottom);
     }
 
+    /**
+     * parses text from the IDE into opcodes and loads them into
+     * a code segment in memory starting at 0
+     * @param code
+     */
+    public static void loadCode(String code) {
+        code = code.replaceAll("\\r?\\n", "");
+        BitSet processedCode = new BitSet(code.length());
+        for(int i=0; i<code.length(); i++) {
+            if(code.charAt(i) == '1') {
+                processedCode.set(code.length() - i, true); // read in the bits reversed, because bitset uses little endian
+            } else if(code.charAt(i) == '0') {
+                processedCode.set(code.length() - i, false);
+            } else {
+                throw new IllegalArgumentException("An illegal character "+code.charAt(i)+ "was found at position: "+i);
+            }
+        }
+        System.out.println(processedCode.toString());
+        byte[] program = RadixOperations.toByteArray(code);
+        short codeSegmentOffset = 0;
+        for(int i=0; i<program.length; i++) {
+            Memory.setMemoryAt((short) (codeSegmentOffset+i), program[i]);
+        }
+    }
+
 
     private class EventListener implements ActionListener {
         Control control;
@@ -72,29 +97,6 @@ public class ControlPanel extends JPanel{
             }
         }
 
-        /**
-         * parses text from the IDE into opcodes and loads them into
-         * a code segment in memory starting at 0
-         * @param code
-         */
-        public void loadCode(String code) {
-            code = code.replaceAll("\\r?\\n", "");
-            BitSet processedCode = new BitSet(code.length());
-            for(int i=0; i<code.length(); i++) {
-                if(code.charAt(i) == '1') {
-                    processedCode.set(code.length() - i, true); // read in the bits reversed, because bitset uses little endian
-                } else if(code.charAt(i) == '0') {
-                    processedCode.set(code.length() - i, false);
-                } else {
-                    throw new IllegalArgumentException("An illegal character "+code.charAt(i)+ "was found at position: "+i);
-                }
-            }
-            System.out.println(processedCode.toString());
-            byte[] program = RadixOperations.toByteArray(code);
-            short codeSegmentOffset = 0;
-            for(int i=0; i<program.length; i++) {
-                Memory.setMemoryAt((short) (codeSegmentOffset+i), program[i]);
-            }
-        }
+
     }
 }

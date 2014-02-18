@@ -1,2 +1,31 @@
+# File
+# ----
+
+# Title: THE Z80 EMULATOR MODULE LISTING
+# Author: Joseph Frangoudes
+# Date: Mon 17th February 2014
+
+
+# About
+# -----
+
+# This file is how the core emulator finds out about its modules
+# Write in this document on separate lines, the classpaths of
+# all Module type classes that you want activated at runtime
+# the '#' symbol marks a line as a comment
+
+# Please Note
+# -----------
+
+# To deactivate a module simply comment out the line that lists it
+# DO NOT delete the line as this means that people need to look at the source
+# To figure out the names of the modules
+
+# Activated Modules
+# -----------------
+
+# Assembler
 z80.modules.impls.assembler.AssemblerModule
+
+# Virtual Screen
 z80.modules.impls.io.screen.ScreenModule

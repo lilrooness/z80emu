@@ -52,6 +52,7 @@ public class Window extends JFrame {
 
         menuBar.add(memory);
         menuBar.add(help);
+        modules = new JMenu("Modules");
 
         linkMenu = new JMenuItem("Z80 Docs");
         help.add(linkMenu);
@@ -96,33 +97,16 @@ public class Window extends JFrame {
 
     public void addModules() {
         moduleController = new ModuleController();
-        BufferedReader in = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader()
-                .getResourceAsStream("modules")));
-        modules = new JMenu("Modules");
 
-        String line;
-        try {
-            while((line = in.readLine()) != null) {
-                if(!line.trim().isEmpty() && ! line.startsWith("#")) {
-                    Module m = (Module) this.getClass().getClassLoader().loadClass(line).newInstance();
-                    addModule(m);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        for(int i=0; i<moduleController.getKeyArray().length; i++) {
+            addModule(moduleController.getModule((String)moduleController.getKeyArray()[i]));
         }
 
         menuBar.add(modules);
     }
 
     public void addModule(Module module) {
-        moduleController.addModule(module);
+//        moduleController.addModule(module);
         JMenuItem menuItem = new JMenuItem(module.getName());
         menuItem.putClientProperty("name", module.getName());
 

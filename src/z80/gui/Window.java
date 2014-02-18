@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -92,9 +96,27 @@ public class Window extends JFrame {
 
     public void addModules() {
         moduleController = new ModuleController();
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader()
+                .getResourceAsStream("modules")));
         modules = new JMenu("Modules");
 
-        addModule(new AssemblerModule());
+        String line;
+        try {
+            while((line = in.readLine()) != null) {
+                if(!line.trim().isEmpty() && ! line.startsWith("#")) {
+                    Module m = (Module) this.getClass().getClassLoader().loadClass(line).newInstance();
+                    addModule(m);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         menuBar.add(modules);
     }

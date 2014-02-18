@@ -87,7 +87,7 @@ public class Assembler {
                     if(indexReg.equals("IY")) {
                         opcode = "11011101"+"01"+reg+"110"+d;
                     } else if(indexReg.equals("IX")) {
-                        opcode = "";
+                        opcode = "11111111"+"01"+reg+"110"+d;
                     }
                 } else if((matcher = ld8bitRegToMemory.matcher(remaining)).matches()) {
 

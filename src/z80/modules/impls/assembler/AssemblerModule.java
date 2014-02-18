@@ -10,7 +10,7 @@ public class AssemblerModule extends AbstractModule {
     AssemblerGUI assemblerGUI;
 
     public AssemblerModule() {
-        this.name = "AssemblerModule";
+        this.name = "Assembler";
         this.active = false;
         assemblerGUI = new AssemblerGUI();
     }

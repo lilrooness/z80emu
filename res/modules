@@ -24,5 +24,8 @@
 # Activated Modules
 # -----------------
 
+# Assembler
 z80.modules.impls.assembler.AssemblerModule
+
+# Virtual Screen
 z80.modules.impls.io.screen.ScreenModule

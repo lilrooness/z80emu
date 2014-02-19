@@ -12,7 +12,7 @@ public class ScreenModule extends AbstractModule {
 
     public ScreenModule() {
         super();
-        screenGUI = new ScreenGUI(840, 480);
+
     }
 
     @Override
@@ -27,6 +27,7 @@ public class ScreenModule extends AbstractModule {
 
     @Override
     public void onActivate() {
+        screenGUI = new ScreenGUI(10, 10, 100);
         screenGUI.activate();
     }
 

@@ -1,0 +1,2 @@
+LD A, ffh
+LD (64h), A

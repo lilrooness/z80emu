@@ -2,16 +2,11 @@ package z80.gui;
 
 import z80.modules.Module;
 import z80.modules.ModuleController;
-import z80.modules.impls.assembler.AssemblerModule;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +28,6 @@ public class Window extends JFrame {
     private JMenu help;
     private JMenuItem linkMenu;
     private JMenu modules;
-    private ArrayList<String> moduleNames;
 
     private ModuleController moduleController;
 
@@ -95,7 +89,7 @@ public class Window extends JFrame {
         timer.start();
     }
 
-    public void addModules() {
+    private void addModules() {
         moduleController = new ModuleController();
 
         for(int i=0; i<moduleController.getKeyArray().length; i++) {
@@ -105,8 +99,7 @@ public class Window extends JFrame {
         menuBar.add(modules);
     }
 
-    public void addModule(Module module) {
-//        moduleController.addModule(module);
+    private void addModule(Module module) {
         JMenuItem menuItem = new JMenuItem(module.getName());
         menuItem.putClientProperty("name", module.getName());
 

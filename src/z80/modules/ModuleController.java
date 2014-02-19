@@ -1,11 +1,9 @@
 package z80.modules;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Created by Joe on 08/02/2014.
@@ -13,7 +11,6 @@ import java.util.Set;
 public class ModuleController {
 
     private HashMap<String, Module> modules;
-//    private ArrayList<String> moduleNames;
 
     public ModuleController() {
         modules = new HashMap<String, Module>();
@@ -42,7 +39,7 @@ public class ModuleController {
         String line;
         try {
             while((line = in.readLine()) != null) {
-                if(!line.trim().isEmpty() && ! line.startsWith("#")) {
+                if(!line.trim().isEmpty() && !line.startsWith("#")) {
                     Module m = (Module) this.getClass().getClassLoader().loadClass(line).newInstance();
                     addModule(m);
                 }

@@ -27,7 +27,7 @@ public class ScreenModule extends AbstractModule {
 
     @Override
     public void onActivate() {
-        screenGUI = new ScreenGUI(10, 10, 100);
+        screenGUI = new ScreenGUI(50, 50, 100);
         screenGUI.activate();
     }
 

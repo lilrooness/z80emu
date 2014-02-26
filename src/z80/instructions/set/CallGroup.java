@@ -37,8 +37,8 @@ public class CallGroup {
 
     public static int ret() {
         RegisterState registerState = RegisterState.getInstance();
-        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.pull() & 0xff));
-        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.pull() & 0xff));
+        String msb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.pop() & 0xff));
+        String lsb = RadixOperations.prependZeros(Integer.toBinaryString(Memory.pop() & 0xff));
         registerState.setPc(RadixOperations.toShort(msb + lsb));
         return 3;
     }

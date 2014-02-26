@@ -30,6 +30,7 @@ public class ScreenGUI extends JFrame {
         setSize(300, 300);
         setLayout(new BorderLayout());
         display = new JPanel();
+        display.setPreferredSize(new Dimension(300, 300));
 
         add(display, BorderLayout.CENTER);
 
@@ -65,9 +66,9 @@ public class ScreenGUI extends JFrame {
                 );
                 g.fillRect(
                         (x-1) * (this.getWidth() / hres),
-                        (y-1) * (this.getHeight() / vres),
+                        (y-1) * (this.getHeight() / vres) + 22,
                         x * (this.getWidth() / hres),
-                        y * (this.getHeight() / vres)
+                        y * (this.getHeight() / vres) + 22
                 );
             }
         }

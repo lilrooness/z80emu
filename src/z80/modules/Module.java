@@ -14,5 +14,4 @@ public interface Module {
     public void onDisable();
 
     public boolean isActive();
-
 }

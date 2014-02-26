@@ -46,7 +46,6 @@ public class Memory {
         String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getHl()[1] & 0xff));
         String bin = lsb + msb;
         setMemoryAt(RadixOperations.toShort(bin), value);
-//        memory[RadixOperations.toShort(bin)] = value;
     }
 
     public static void setIndexDE(byte value) {
@@ -55,7 +54,6 @@ public class Memory {
         String msb = RadixOperations.prependZeros(Integer.toBinaryString(registerState.getDe()[1] & 0xff));
         String bin = lsb + msb;
         setMemoryAt(RadixOperations.toShort(bin), value);
-//        memory[RadixOperations.toShort(bin)] = value;
     }
 
     public static byte index16Bit(String bin) {
@@ -65,11 +63,10 @@ public class Memory {
     public static void push(byte value) {
         RegisterState registerState = RegisterState.getInstance();
         registerState.setSp((short) (registerState.getSp() - 1));
-//        Memory.memory[registerState.getSp()] = value;
         setMemoryAt(registerState.getSp(), value);
     }
 
-    public static byte pull() {
+    public static byte pop() {
         RegisterState registerState = RegisterState.getInstance();
         byte value = getMemoryAt(registerState.getSp());
         registerState.setSp((short) (registerState.getSp() + 1));
@@ -80,12 +77,12 @@ public class Memory {
         changeSupport.addPropertyChangeListener(listener);
     }
 
-    public static void setMemoryAt(short index, byte value) {
+    public static synchronized void setMemoryAt(short index, byte value) {
         memory[index] = value;
         changeSupport.firePropertyChange("memory", null, memory);
     }
 
-    public static byte getMemoryAt(int index) {
+    public static synchronized byte getMemoryAt(int index) {
         return memory[index];
     }
 

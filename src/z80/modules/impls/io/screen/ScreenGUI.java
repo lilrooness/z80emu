@@ -57,18 +57,19 @@ public class ScreenGUI extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        for(int y = 1; y <= vres; y ++) {
-            for(int x = 1; x <= hres; x ++) {
+        for(int y = 0; y < vres; y ++) {
+            for(int x = 0; x < hres; x ++) {
                 g.setColor(new Color(
-                        rpixels[x * y - 1],
-                        gpixels[x * y - 1],
-                        bpixels[x * y - 1])
+//                        rpixels[x * y - 1],
+                        rpixels[x + y * hres],
+                        gpixels[x * y],
+                        bpixels[x * y])
                 );
                 g.fillRect(
-                        (x-1) * (this.getWidth() / hres),
-                        (y-1) * (this.getHeight() / vres) + 22,
-                        x * (this.getWidth() / hres),
-                        y * (this.getHeight() / vres) + 22
+                        (x) * (this.getWidth() / hres),
+                        (y) * (this.getHeight() / vres) + 22,
+                        (x+1) * (this.getWidth() / hres),
+                        (y+1) * (this.getHeight() / vres) + 22
                 );
             }
         }

@@ -1,2 +1,14 @@
 LD A, ffh
-LD (64h), A
+LD (69h), A
+LD (6ah), A
+LD (6bh), A
+LD (6ch), A
+LD (9eh), A
+LD (cfh), A
+LD (100h), A
+LD (131h), A
+LD (163h), A
+LD (164h), A
+LD (165h), A
+LD (166h), A
+LD (72h), A

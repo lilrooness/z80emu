@@ -6,10 +6,7 @@
  */
 package z80.core;
 
-import z80.instructions.set.Arith8Bit;
-import z80.instructions.set.ExTransSearchGroup;
-import z80.instructions.set.LD16;
-import z80.instructions.set.LD8Bit;
+import z80.instructions.set.*;
 
 /**
  * <description>
@@ -237,7 +234,9 @@ public class Control {
             case 0x32:{
                 LD8Bit.LDnnA(registerState);
             }break;
-//            case (byte)
+            case (byte)0xc3: {
+                JmpGroup.JPnn();
+            }
         }
     }
 

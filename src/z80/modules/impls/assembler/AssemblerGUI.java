@@ -19,6 +19,7 @@ public class AssemblerGUI extends JFrame {
     private JMenuBar jMenuBar;
     private JMenu file;
     private JMenuItem load;
+    private JScrollPane scrollPane;
 
     public AssemblerGUI() {
         setTitle("Z80 Assembler Module");
@@ -27,6 +28,7 @@ public class AssemblerGUI extends JFrame {
         setLayout(new BorderLayout());
         jTextArea = new JTextArea();
         compile = new JButton("Compile and Load");
+        scrollPane = new JScrollPane(jTextArea);
 
         jMenuBar = new JMenuBar();
         file = new JMenu("File");
@@ -57,7 +59,7 @@ public class AssemblerGUI extends JFrame {
             }
         });
 
-        add(jTextArea, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
         add(compile, BorderLayout.SOUTH);
         add(jMenuBar, BorderLayout.NORTH);
 

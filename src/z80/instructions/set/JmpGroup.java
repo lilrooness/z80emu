@@ -13,8 +13,8 @@ public class JmpGroup {
 
     public static int JPnn() {
         RegisterState registerState = RegisterState.getInstance();
-        String LSB = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         String MSB = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
+        String LSB = RadixOperations.prependZeros(Integer.toBinaryString(registerState.fetchWord8() & 0xff));
         String operand = MSB + LSB;
         registerState.setPc(RadixOperations.toShort(operand));
         return 3;
